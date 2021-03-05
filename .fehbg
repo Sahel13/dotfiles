@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-max '/home/sahel/Arch/Wallpapers/garuda.jpg'
