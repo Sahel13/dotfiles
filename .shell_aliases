@@ -1,0 +1,57 @@
+# nvim instead of vim
+alias vim="nvim"
+
+# Accessing this file
+alias aliases="vim ~/.shell_aliases"
+
+# Package management (pacman)
+alias pacman_install="sudo pacman -S --needed"
+alias pacman_info="sudo pacman -Qi"
+alias pacman_uninstall="sudo pacman -Rns"
+alias pacman_update="sudo pacman -Syyu"
+alias list_orphans="sudo pacman -Qtdq"
+alias cleanup_orphans="sudo pacman -Rns $(pacman -Qtdq)"
+alias clean_cache="sudo pacman -Scc"
+
+# System services (systemctl)
+alias enable_service="sudo systemctl enable"
+alias disable_service="sudo systemctl disable"
+alias start_service="sudo systemctl start"
+alias stop_service="sudo systemctl stop"
+
+# Configuration files
+alias bash_config="vim ~/.bashrc"
+alias vim_config="vim ~/.vimrc"
+alias termite_config="vim ~/.config/termite/config"
+alias picom_config="vim ~/.config/picom/picom.conf"
+alias xmonad_config="vim ~/.xmonad/xmonad.hs"
+alias xmobar_config="vim ~/.config/xmobar/xmobarrc"
+
+# Get the fastest mirrors
+alias get_mirrors="sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+
+# Other utilities
+
+## Wifi and bluetooth
+alias block_wifi="sudo rfkill block 0"
+alias unblock_wifi="sudo rfkill unblock 0"
+alias block_bluetooth="sudo rfkill block 1"
+alias unblock_bluetooth="sudo rfkill unblock 1"
+
+## File browsing
+alias ls="ls --color=auto"
+alias la="ls -A"
+alias ..="cd ../"
+
+## Self-explanatory
+alias show_disk_space="df -H /dev/sda2 /dev/sda3"
+alias hardware_info="hwinfo --short"
+alias find_files="sudo find / -iname"
+
+alias vimwiki="vim ~/Documents/vimwiki/index.md"
+
+## Current
+alias report="vim ~/Documents/lab/report/main.tex"
+
+# For backing up config files
+alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
