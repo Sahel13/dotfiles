@@ -1,0 +1,84 @@
+snippet template "A standard template for lab reports"
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{graphicx}
+
+\setlength{\parindent}{3em}
+\setlength{\parskip}{0.5em}
+\renewcommand{\baselinestretch}{1.1}
+
+\usepackage{geometry}
+\geometry{
+	height=9in,
+	width=6in
+}
+
+\title{$1}
+\author{Sahel Mohammad Iqbal \\ 1711112}
+\date{${2:\today}}
+
+\begin{document}
+\maketitle
+
+$3
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}
+endsnippet
+
+snippet section
+\section{$1}
+endsnippet
+
+snippet sub
+\subsection{$1}
+endsnippet
+
+snippet subsub
+\subsubsection{$1}
+endsnippet
+
+snippet equation
+\begin{equation}
+	$1
+\end{equation}
+endsnippet
+
+snippet frac "Fraction"
+\frac{$1}{$2}
+endsnippet
+
+snippet itemize "Unordered list"
+\begin{itemize}
+	\item $1
+\end{itemize}
+endsnippet
+
+snippet enumerate "Ordered list"
+\begin{enumerate}
+	\item $1
+\end{enumerate}
+endsnippet
+
+snippet figure
+\begin{figure}[htbp]
+	\center
+	\includegraphics[width=${1:10}cm]{${2:file_name}}
+	\caption{$3}
+	\label{fig:$4}
+\end{figure}
+endsnippet
+
+snippet frame "New slide"
+\begin{frame}
+	\frametitle{${1:title}}
+	\begin{itemize}
+		\item $2
+	\end{itemize}
+\end{frame}
+endsnippet
