@@ -82,3 +82,6 @@ nnoremap k gk
 "Only works in visual mode
 vmap <C-c> "+y<ESC>
 vmap <C-v> c<ESC>"+p
+
+"Stop backup and swap files
+set nobackup noswapfile

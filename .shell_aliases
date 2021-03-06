@@ -21,6 +21,7 @@ alias stop_service="sudo systemctl stop"
 
 # Configuration files
 alias bash_config="vim ~/.bashrc"
+alias zsh_config="vim ~/.zshrc"
 alias vim_config="vim ~/.vimrc"
 alias termite_config="vim ~/.config/termite/config"
 alias picom_config="vim ~/.config/picom/picom.conf"
@@ -48,10 +49,10 @@ alias show_disk_space="df -H /dev/sda2 /dev/sda3"
 alias hardware_info="hwinfo --short"
 alias find_files="sudo find / -iname"
 
-alias vimwiki="vim ~/Documents/vimwiki/index.md"
-
 ## Current
+alias vimwiki="vim ~/Documents/vimwiki/index.md"
 alias report="vim ~/Documents/lab/report/main.tex"
+alias jupyter="cd ~/Documents/jupyter/"
 
 # For backing up config files
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"

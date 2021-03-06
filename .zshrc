@@ -12,7 +12,12 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# Customize the prompt
+PROMPT="%2~ $ "
+
 # Adding aliases
 if [ -f ~/.shell_aliases ]; then
 	. ~/.shell_aliases
 fi
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
