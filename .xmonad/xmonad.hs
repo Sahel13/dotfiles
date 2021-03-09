@@ -15,6 +15,7 @@ import XMonad.Layout.NoBorders (smartBorders)
 -- Utilities
 import XMonad.Util.SpawnOnce
 import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.Cursor
 
 ------------------------------------------------------------------
 -- Main
@@ -61,6 +62,7 @@ myStartupHook = do
     spawnOnce "xfce4-power-manager &" -- Power manager
     spawnOnce "unclutter &" -- Hide the cursor
     setWMName "LG3D"
+    setDefaultCursor xC_left_ptr -- Only when using gdm
 
 ------------------------------------------------------------------
 -- Layout
@@ -93,7 +95,7 @@ myKeys =
     [ ("M-S-r", spawn "xmonad --recompile && xmonad --restart")
     , ("M-S-q", io exitSuccess)
     , ("M-q", kill)
-    , ("M-<Return>", spawn (myTerminal ++ " -e zsh"))
+    , ("M-<Return>", spawn myTerminal)
 
     -- Applications
     , ("M-d", spawn "dmenu_run")
