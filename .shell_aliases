@@ -8,10 +8,13 @@ alias aliases="vim ~/.shell_aliases"
 alias pacman_install="sudo pacman -S --needed"
 alias pacman_info="sudo pacman -Qi"
 alias pacman_uninstall="sudo pacman -Rns"
-alias pacman_update="sudo pacman -Syyu"
+alias pacman_update="sudo pacman -Syu"
 alias list_orphans="sudo pacman -Qtdq"
 alias cleanup_orphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias clean_cache="sudo pacman -Scc"
+
+# AUR build
+alias buildaur="makepkg -si --rmdeps --clean"
 
 # Configuration files
 alias bash_config="vim ~/.bashrc"
@@ -33,7 +36,7 @@ alias unblock_bluetooth="sudo rfkill unblock 1"
 
 ## File browsing
 alias ls="ls --color=auto"
-alias la="ls -A"
+alias la="ls -lA"
 alias ..="cd ../"
 
 ## Self-explanatory
