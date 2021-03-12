@@ -75,6 +75,7 @@ myLayoutHook = smartBorders ((spacingRaw False (Border 6 0 6 0) True (Border 0 6
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
     , className =? "Signal" --> doShift "chat"
+    , className =? "org.remmina.Remmina" --> doShift "work"
     ]
 
 ------------------------------------------------------------------
