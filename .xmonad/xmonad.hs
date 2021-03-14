@@ -74,8 +74,9 @@ myLayoutHook = smartBorders ((spacingRaw False (Border 6 0 6 0) True (Border 0 6
 ------------------------------------------------------------------
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
-    , className =? "Signal" --> doShift "chat"
     , className =? "org.remmina.Remmina" --> doShift "work"
+    , className =? "Signal" --> doShift "chat"
+    , className =? "discord" --> doShift "chat"
     ]
 
 ------------------------------------------------------------------
@@ -104,6 +105,8 @@ myKeys =
     , ("M1-S-<Return>", spawn "nautilus")
     , ("M-M1-f", spawn "firefox")
     , ("M-M1-s", spawn "signal-desktop")
+    , ("M-M1-d", spawn "discord")
+    , ("M-M1-r", spawn "remmina")
 
     ---- Email
     , ("M-M1-p", spawn ("firefox" ++ " https://mail.protonmail.com/login"))
