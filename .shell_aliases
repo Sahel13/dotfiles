@@ -17,14 +17,9 @@ alias clean_cache="sudo pacman -Scc"
 alias buildaur="makepkg -si --rmdeps --clean"
 
 # Configuration files
-alias bash_config="vim ~/.bashrc"
 alias zsh_config="vim ~/.zshrc"
 alias vim_config="vim ~/.vimrc"
 alias xmonad_config="vim ~/.xmonad/xmonad.hs"
-alias xmobar_config="vim ~/.config/xmobar/xmobarrc"
-
-# Get the fastest mirrors
-alias get_mirrors="sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 
 # Other utilities
 
