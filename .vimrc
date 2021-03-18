@@ -3,30 +3,35 @@ set nocompatible
 "Plugins using vim-plug
 call plug#begin('~/.vim/plugged')
 
-Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'SirVer/ultisnips'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
 "Set encoding
 set enc=utf-8
 
-"Keep cursor at the center of the screen
-set scrolloff=20
-
-"Set 256 colors
-set t_Co=256
+"Vimtex
+let g:vimtex_compiler_latexmk = {
+	\ 'build_dir' : 'build_dir',
+	\}
 
 "UltiSnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "Vimwiki
 let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
 		      \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
+
+"Keep cursor at the center of the screen
+set scrolloff=20
+
+"Set 256 colors
+set t_Co=256
 
 "Theme settings
 let g:gruvbox_contrast_dark = 'dark'
