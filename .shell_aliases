@@ -30,8 +30,7 @@ alias block_bluetooth="sudo rfkill block 1"
 alias unblock_bluetooth="sudo rfkill unblock 1"
 
 ## File browsing
-alias ls="ls --color=auto"
-alias la="ls -lA"
+alias ls="ls --color=auto -lA"
 alias ..="cd ../"
 
 ## Self-explanatory
