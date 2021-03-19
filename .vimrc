@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'lervag/vimtex'
 Plug 'SirVer/ultisnips'
-Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -21,11 +20,6 @@ let g:vimtex_compiler_latexmk = {
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-"Vimwiki
-let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
-		      \ 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_global_ext = 0
 
 "Keep cursor at the center of the screen
 set scrolloff=20
