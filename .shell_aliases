@@ -41,8 +41,9 @@ alias find_word="grep -rw"
 
 ## Current
 alias vimwiki="vim ~/Documents/vimwiki/index.md"
-alias report="vim ~/Documents/lab/report/main.tex"
+alias labreport="vim ~/Documents/lab/report/main.tex"
 alias jupyter="cd ~/Documents/jupyter/"
+alias report="vim ~/Documents/project/report/main.tex"
 
 # For backing up config files
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
