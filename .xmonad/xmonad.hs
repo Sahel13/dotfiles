@@ -31,7 +31,7 @@ myConfig = defaultConfig
     , borderWidth = 1
     , normalBorderColor = "#000000"
     , focusedBorderColor = "#ffd9c9"
-    , workspaces =myWorkspaces
+    , workspaces = myWorkspaces
     -- Hooks
     , startupHook = myStartupHook
     , layoutHook = myLayoutHook
