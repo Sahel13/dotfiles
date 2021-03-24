@@ -57,6 +57,7 @@ myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "~/.fehbg &" -- Wallpaper
     spawnOnce "picom -b &" -- Compositor
+    spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- Authentication agent
     spawnOnce "/usr/bin/dunst &" -- Notification server
     spawnOnce "xfce4-power-manager &" -- Power manager
     spawnOnce "unclutter &" -- Hide the cursor
