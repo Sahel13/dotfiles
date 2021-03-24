@@ -20,4 +20,7 @@ if [ -f ~/.shell_aliases ]; then
 	. ~/.shell_aliases
 fi
 
+# Vi mode
+bindkey -v
+
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
