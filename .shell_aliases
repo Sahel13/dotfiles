@@ -34,16 +34,16 @@ alias ls="ls --color=auto -lA"
 alias ..="cd ../"
 
 ## Self-explanatory
-alias show_disk_space="df -H /dev/sda2"
+alias show_disk_space="df -H /dev/sda2 /dev/sda3"
 alias hardware_info="hwinfo --short"
 alias find_files="sudo find / -iname"
 alias find_word="grep -rw"
 
 ## Current
 alias vimwiki="vim ~/Documents/vimwiki/index.md"
-alias labreport="vim ~/Documents/lab/report/main.tex"
+alias report="vim ~/Documents/lab/report/main.tex"
 alias jupyter="cd ~/Documents/jupyter/"
-alias report="vim ~/Documents/project/report/main.tex"
+alias project-report="vim ~/Documents/project/report/main.tex"
 
 # For backing up config files
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
