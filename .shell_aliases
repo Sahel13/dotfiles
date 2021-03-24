@@ -34,7 +34,7 @@ alias ls="ls --color=auto -lA"
 alias ..="cd ../"
 
 ## Self-explanatory
-alias show_disk_space="df -H /dev/sda3"
+alias show_disk_space="df -H /dev/sda2"
 alias hardware_info="hwinfo --short"
 alias find_files="sudo find / -iname"
 alias find_word="grep -rw"
