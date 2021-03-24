@@ -15,7 +15,6 @@ import XMonad.Layout.NoBorders (smartBorders)
 -- Utilities
 import XMonad.Util.SpawnOnce
 import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Util.Cursor
 
 ------------------------------------------------------------------
 -- Main
@@ -62,7 +61,6 @@ myStartupHook = do
     spawnOnce "xfce4-power-manager &" -- Power manager
     spawnOnce "unclutter &" -- Hide the cursor
     setWMName "LG3D"
-    setDefaultCursor xC_left_ptr -- Only when using gdm
 
 ------------------------------------------------------------------
 -- Layout
@@ -77,6 +75,7 @@ myManageHook = composeAll
     , className =? "org.remmina.Remmina" --> doShift "work"
     , className =? "Signal" --> doShift "chat"
     , className =? "discord" --> doShift "chat"
+    , className =? "vlc" --> doShift "misc"
     ]
 
 ------------------------------------------------------------------
