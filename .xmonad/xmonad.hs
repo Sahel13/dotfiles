@@ -59,7 +59,7 @@ myStartupHook = do
     spawnOnce "~/.fehbg &" -- Wallpaper
     spawnOnce "picom -b &" -- Compositor
     spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &" -- Authentication agent
-    spawnOnce "/usr/lib/notification-daemon-1.0/notification-daemon" -- Notification server
+    spawnOnce "/usr/lib/xfce4/notifyd/xfce4-notifyd"-- Notification server
     spawnOnce "xfce4-power-manager &" -- Power manager
     spawnOnce "unclutter &" -- Hide the cursor
     setWMName "LG3D"
@@ -104,7 +104,7 @@ myKeys =
     -- Applications
     , ("M-d", spawn "dmenu_run")
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
-    , ("M1-S-<Return>", spawn "nautilus")
+    , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-f", spawn "firefox")
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-d", spawn "discord")
