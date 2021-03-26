@@ -21,25 +21,23 @@ alias zsh_config="vim ~/.zshrc"
 alias vim_config="vim ~/.vimrc"
 alias xmonad_config="vim ~/.xmonad/xmonad.hs"
 
-# Other utilities
-
-## Wifi and bluetooth
+# Wifi and bluetooth
 alias block_wifi="sudo rfkill block 0"
 alias unblock_wifi="sudo rfkill unblock 0"
 alias block_bluetooth="sudo rfkill block 1"
 alias unblock_bluetooth="sudo rfkill unblock 1"
 
-## File browsing
+# File browsing
 alias ls="ls --color=auto -lA"
 alias ..="cd ../"
 
-## Self-explanatory
+# Self-explanatory
 alias show_disk_space="df -H /dev/sda2 /dev/sda3"
 alias hardware_info="hwinfo --short"
 alias find_files="sudo find / -iname"
 alias find_word="grep -rw"
 
-## Current
+# Current
 alias vimwiki="vim ~/Documents/vimwiki/index.md"
 alias report="vim ~/Documents/lab/report/main.tex"
 alias jupyter="cd ~/Documents/jupyter/"
