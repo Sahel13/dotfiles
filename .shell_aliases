@@ -5,37 +5,37 @@ alias vim="nvim"
 alias aliases="vim ~/.shell_aliases"
 
 # Package management (pacman)
-alias pacman_install="sudo pacman -S --needed"
-alias pacman_info="sudo pacman -Qi"
-alias pacman_uninstall="sudo pacman -Rns"
-alias pacman_update="sudo pacman -Syu"
-alias list_orphans="sudo pacman -Qtdq"
-alias cleanup_orphans="sudo pacman -Rns $(pacman -Qtdq)"
-alias clean_cache="sudo pacman -Scc"
+alias pacman-install="sudo pacman -S --needed"
+alias pacman-info="sudo pacman -Qi"
+alias pacman-uninstall="sudo pacman -Rns"
+alias pacman-update="sudo pacman -Syu"
+alias list-orphans="sudo pacman -Qtdq"
+alias cleanup-orphans="sudo pacman -Rns $(pacman -Qtdq)"
+alias clean-cache="sudo pacman -Scc"
 
 # AUR build
-alias buildaur="makepkg -si --rmdeps --clean"
+alias aur-build="makepkg -si --rmdeps --clean"
 
 # Configuration files
-alias zsh_config="vim ~/.zshrc"
-alias vim_config="vim ~/.vimrc"
-alias xmonad_config="vim ~/.xmonad/xmonad.hs"
+alias zsh-config="vim ~/.zshrc"
+alias vim-config="vim ~/.vimrc"
+alias xmonad-config="vim ~/.xmonad/xmonad.hs"
 
 # Wifi and bluetooth
-alias block_wifi="sudo rfkill block 0"
-alias unblock_wifi="sudo rfkill unblock 0"
-alias block_bluetooth="sudo rfkill block 1"
-alias unblock_bluetooth="sudo rfkill unblock 1"
+alias block-wifi="sudo rfkill block 0"
+alias unblock-wifi="sudo rfkill unblock 0"
+alias block-bluetooth="sudo rfkill block 1"
+alias unblock-bluetooth="sudo rfkill unblock 1"
 
 # File browsing
 alias ls="ls --color=auto -lA"
 alias ..="cd ../"
 
 # Self-explanatory
-alias show_disk_space="df -H /dev/sda2"
-alias hardware_info="hwinfo --short"
-alias find_files="sudo find / -iname"
-alias find_word="grep -rw"
+alias show-disk-space="df -H /dev/sda2"
+alias hardware-info="hwinfo --short"
+alias find-files="sudo find / -iname"
+alias find-word="grep -rw"
 
 # Current
 alias vimwiki="vim ~/Documents/vimwiki/index.md"
