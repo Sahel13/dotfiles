@@ -103,6 +103,7 @@ myKeys =
 
     -- Applications
     , ("M-d", spawn "dmenu_run")
+    , ("M-s", spawn "flameshot gui")
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
     , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-f", spawn "firefox")
