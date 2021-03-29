@@ -103,7 +103,7 @@ myKeys =
 
     -- Settings
     , ("M-n", spawn (myTerminal ++ " -e nmtui"))
-    , ("M-h", spawn (myTerminal ++ " -e nmtui"))
+    , ("M-h", spawn (myTerminal ++ " -e htop"))
 
     -- Applications
     , ("M-d", spawn "dmenu_run")
