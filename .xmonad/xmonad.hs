@@ -101,6 +101,10 @@ myKeys =
     , ("M-q", kill)
     , ("M-<Return>", spawn myTerminal)
 
+    -- Settings
+    , ("M-n", spawn (myTerminal ++ " -e nmtui"))
+    , ("M-h", spawn (myTerminal ++ " -e nmtui"))
+
     -- Applications
     , ("M-d", spawn "dmenu_run")
     , ("M-s", spawn "flameshot gui")
@@ -111,7 +115,7 @@ myKeys =
     , ("M-M1-d", spawn "discord")
     , ("M-M1-r", spawn "remmina")
 
-    ---- Email
+    -- Email
     , ("M-M1-p", spawn ("firefox" ++ " https://mail.protonmail.com/login"))
     , ("M-M1-g", spawn ("firefox" ++ " https://mail.google.com/mail/u/0/#inbox"))
 
