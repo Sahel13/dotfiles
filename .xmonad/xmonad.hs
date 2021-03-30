@@ -101,13 +101,13 @@ myKeys =
     , ("M-q", kill)
     , ("M-<Return>", spawn myTerminal)
 
-    -- Settings
-    , ("M-n", spawn (myTerminal ++ " -e nmtui"))
-    , ("M-h", spawn (myTerminal ++ " -e htop"))
-
-    -- Applications
+    -- Utilities
     , ("M-d", spawn "dmenu_run")
     , ("M-s", spawn "flameshot gui")
+    , ("M-S-n", spawn (myTerminal ++ " -e nmtui"))
+    , ("M-S-h", spawn (myTerminal ++ " -e htop"))
+
+    -- Applications
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
     , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-f", spawn "firefox")
