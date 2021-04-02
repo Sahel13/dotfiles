@@ -41,26 +41,27 @@ cell_height_scale = 1.1
 # "off", "left" or "right"
 #scrollbar = off
 
+# Red Planet
 [colors]
-background = #000000
-cursor = #968c83
-foreground = #ffffff
-color0 = #20111b
-color1 = #be100e
-color2 = #858162
-color3 = #eaa549
-color4 = #426a79
-color5 = #97522c
-color6 = #989a9c
-color7 = #968c83
-color8 = #5e5252
-color9 = #be100e
-color10 = #858162
-color11 = #eaa549
-color12 = #426a79
-color13 = #97522c
-color14 = #989a9c
-color15 = #d5ccba
-colorBD = #968c83
+background = #222222
+cursor = #c2b790
+foreground = #c2b790
+color0 = #202020
+color1 = #8c3432
+color2 = #728271
+color3 = #e8bf6a
+color4 = #69819e
+color5 = #896492
+color6 = #5b8390
+color7 = #b9aa99
+color8 = #676767
+color9 = #b55242
+color10 = #869985
+color11 = #ebeb91
+color12 = #60827e
+color13 = #de4974
+color14 = #38add8
+color15 = #d6bfb8
+colorBD = #ebeb91
 colorIT =
 colorUL =
