@@ -25,7 +25,7 @@ snippet template "A standard template for lab reports"
 
 $3
 
-\bibliographystyle{unsrt}
+\bibliographystyle{abbrv}
 \bibliography{references}
 
 \end{document}
@@ -68,7 +68,23 @@ endsnippet
 snippet figure
 \begin{figure}[htbp]
 	\center
-	\includegraphics[width=${1:10}cm]{${2:file_name}}
+	\includegraphics[width=$1cm]{${2:file_name}}
+	\caption{$3}
+	\label{fig:$4}
+\end{figure}
+endsnippet
+
+snippet subfigure
+\begin{figure}[htbp]
+	\center
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{${1:file_name}}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{${2:file_name}}
+	\end{subfigure}
 	\caption{$3}
 	\label{fig:$4}
 \end{figure}
