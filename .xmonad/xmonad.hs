@@ -75,6 +75,7 @@ myLayoutHook = smartBorders ((spacingRaw False (Border 6 0 6 0) True (Border 0 6
 ------------------------------------------------------------------
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
+    , className =? "Signal" --> doShift "chat"
     , className =? "vlc" --> doShift "misc"
     ]
 
@@ -108,6 +109,7 @@ myKeys =
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
     , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-f", spawn "firefox")
+    , ("M-M1-s", spawn "signal-desktop")
 
     -- Email
     , ("M-M1-p", spawn ("firefox" ++ " https://mail.protonmail.com/login"))
