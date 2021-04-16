@@ -90,7 +90,32 @@ snippet subfigure
 \end{figure}
 endsnippet
 
-snippet frame "New slide"
+snippet presentation "New presentation"
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{graphicx}
+
+\title{$1}
+\author{Sahel Mohammad Iqbal}
+\institute{NISER}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+$2
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\end{document}
+endsnippet
+
+snippet slide "New slide"
 \begin{frame}
 	\frametitle{${1:title}}
 	\begin{itemize}
