@@ -11,7 +11,6 @@ alias pacman-uninstall="sudo pacman -Rns"
 alias pacman-update="sudo pacman -Syu"
 alias list-orphans="sudo pacman -Qtdq"
 alias cleanup-orphans="sudo pacman -Rns $(pacman -Qtdq)"
-alias clean-cache="sudo pacman -Scc"
 
 # AUR build
 alias aur-build="makepkg -si --rmdeps --clean"
