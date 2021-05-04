@@ -40,6 +40,7 @@ alias find-word="grep -rw"
 alias vimwiki="vim ~/Documents/vimwiki/index.md"
 alias project="cd ~/Documents/project/"
 alias report="vim ~/Documents/project/Report/report.tex"
+alias class="cd ~/Documents/Course\ Work/"
 
 # For backing up config files
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
