@@ -31,7 +31,7 @@ alias ls="ls --color=auto -lA"
 alias ..="cd ../"
 
 # Self-explanatory
-alias show-disk-space="df -H /dev/mapper/cryptroot"
+alias show-disk-space="df -H /dev/sda2"
 alias hardware-info="hwinfo --short"
 alias find-files="sudo find / -iname"
 alias find-word="grep -rw"
