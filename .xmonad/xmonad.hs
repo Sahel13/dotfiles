@@ -68,7 +68,7 @@ myStartupHook = do
 ------------------------------------------------------------------
 -- Layout
 ------------------------------------------------------------------
-myLayoutHook = smartBorders ((spacingRaw False (Border 6 0 6 0) True (Border 0 6 0 6) True $ Tall 1 (3/100) (1/2)) ||| Full)
+myLayoutHook = smartBorders ((spacingRaw False (Border 8 0 8 0) True (Border 0 8 0 8) True $ Tall 1 (3/100) (1/2)) ||| Full)
 
 ------------------------------------------------------------------
 -- Window rules
@@ -76,6 +76,7 @@ myLayoutHook = smartBorders ((spacingRaw False (Border 6 0 6 0) True (Border 0 6
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
     , className =? "Signal" --> doShift "chat"
+    , className =? "TelegramDesktop" --> doShift "chat"
     , className =? "vlc" --> doShift "misc"
     ]
 
@@ -111,6 +112,7 @@ myKeys =
     , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-f", spawn "firefox")
     , ("M-M1-s", spawn "signal-desktop")
+    , ("M-M1-t", spawn "telegram-desktop")
 
     -- Email
     , ("M-M1-p", spawn ("firefox" ++ " https://mail.protonmail.com/login"))
