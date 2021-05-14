@@ -113,6 +113,7 @@ myKeys =
     , ("M-M1-f", spawn "firefox")
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-t", spawn "telegram-desktop")
+    , ("M-M1-a", spawn "anki")
 
     -- Email
     , ("M-M1-p", spawn ("firefox" ++ " https://mail.protonmail.com/login"))
