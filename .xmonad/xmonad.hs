@@ -87,7 +87,7 @@ myWorkspaces :: [String]
 myWorkspaces = ["main", "work", "web", "chat", "misc"]
 
 myTerminal :: String
-myTerminal = "termite"
+myTerminal = "alacritty"
 
 ------------------------------------------------------------------
 -- Keybindings
