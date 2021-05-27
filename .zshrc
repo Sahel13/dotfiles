@@ -16,9 +16,7 @@ compinit
 PROMPT="%2~ $ "
 
 # Adding aliases
-if [ -f ~/.shell_aliases ]; then
-	. ~/.shell_aliases
-fi
+[ -f ~/.shell_aliases ] && . ~/.shell_aliases
 
 # Vi mode
 bindkey -v
