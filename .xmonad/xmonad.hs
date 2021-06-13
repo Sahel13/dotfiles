@@ -76,10 +76,10 @@ myLayoutHook = smartBorders ((spacingRaw False (Border 8 0 8 0) True (Border 0 8
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
     , className =? "Mendeley Desktop" --> doShift "main"
+    , className =? "Anki" --> doShift "main"
     , className =? "Signal" --> doShift "chat"
     , className =? "TelegramDesktop" --> doShift "chat"
     , className =? "vlc" --> doShift "misc"
-    , className =? "Anki" --> doShift "misc"
     ]
 
 ------------------------------------------------------------------
@@ -115,15 +115,14 @@ myKeys =
     , ("M-M1-f", spawn "firefox")
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-t", spawn "telegram-desktop")
-    , ("M-M1-a", spawn "anki")
     , ("M-M1-d", spawn "discord")
+    , ("M-M1-a", spawn "anki")
     , ("M-M1-m", spawn "mendeleydesktop")
     , ("M-M1-z", spawn "zoom")
 
     -- Email
     , ("M-M1-p", spawn ("firefox" ++ " https://account.protonmail.com/switch"))
     , ("M-M1-g", spawn ("firefox" ++ " https://mail.google.com/mail/u/0/#inbox"))
-    , ("M-M1-l", spawn ("firefox" ++ " http://localhost:8000/"))
 
     -- Function keys
     , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2")

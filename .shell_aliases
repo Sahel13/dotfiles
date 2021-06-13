@@ -35,12 +35,13 @@ alias show-disk-space="df -H /dev/sda2"
 alias hardware-info="hwinfo --short"
 alias find-files="sudo find / -iname"
 alias find-word="grep -rw"
+alias netcheck="ping -c 3 archlinux.org"
+alias bresume="xbacklight -set 20"
 
 # Current
-alias vimwiki="vim ~/Documents/vimwiki/index.md"
-alias project="cd ~/Documents/project/"
-alias report="vim ~/Documents/project/Report/report.tex"
 alias class="cd ~/Documents/Course\ Work/"
+alias ml="cd ~/Projects/ml"
+alias lingaraj="ssh danush@10.10.0.181"
 
 # For backing up config files
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
