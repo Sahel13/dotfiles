@@ -127,6 +127,13 @@ snippet presentation "New presentation"
 
 \frame{\titlepage}
 
+\AtBeginSection[] {
+	\begin{frame}
+		\frametitle{Table of contents}
+		\tableofcontents[currentsection]
+	\end{frame}
+}
+
 $2
 
 \bibliographystyle{abbrv}

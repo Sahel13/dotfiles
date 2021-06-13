@@ -1,10 +1,15 @@
 {
   "editor.fontFamily": "mononoki Nerd Font",
   "editor.fontSize": 17,
-  "vim.insertModeKeyBindings": [
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "vim.insertModeKeyBindingsNonRecursive": [
     {
       "before": ["j", "k"],
-      "after": ["<Esc>"]
+      "after": ["<esc>"]
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
@@ -15,6 +20,12 @@
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "[css]": {
+    "editor.suggest.insertMode": "replace",
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
   "[javascript]": {
     "editor.detectIndentation": false,
     "editor.insertSpaces": true,
@@ -43,5 +54,12 @@
     "editor.detectIndentation": false,
     "editor.insertSpaces": true,
     "editor.tabSize": 2
-  }
+  },
+  "editor.minimap.enabled": false,
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter.notebook.ipynb",
+      "filenamePattern": "*.ipynb"
+    }
+  ]
 }

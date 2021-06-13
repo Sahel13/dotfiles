@@ -2,7 +2,7 @@
 	name = Sahel Mohammad Iqbal
 	email = sahel13miqbal@protonmail.ch
 [core]
-	editor = vim
+	editor = nvim
 [init]
 	defaultBranch = main
 [pull]
