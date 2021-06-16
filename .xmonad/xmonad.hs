@@ -79,14 +79,16 @@ myManageHook = composeAll
     , className =? "Anki" --> doShift "main"
     , className =? "Signal" --> doShift "chat"
     , className =? "TelegramDesktop" --> doShift "chat"
+    , className =? "zoom" --> doShift "class"
     , className =? "vlc" --> doShift "misc"
+    , className =? "Forticlientsslvpn" --> doShift "misc"
     ]
 
 ------------------------------------------------------------------
 -- Variables
 ------------------------------------------------------------------
 myWorkspaces :: [String]
-myWorkspaces = ["main", "work", "web", "chat", "misc"]
+myWorkspaces = ["main", "work", "web", "chat", "class", "misc"]
 
 myTerminal :: String
 myTerminal = "alacritty"

@@ -27,8 +27,13 @@ alias block-bluetooth="sudo rfkill block 1"
 alias unblock-bluetooth="sudo rfkill unblock 1"
 
 # File browsing
-alias ls="ls --color=auto -lA"
+alias ls="ls --color=auto -ogA"
 alias ..="cd ../"
+alias ...="cd ../../"
+cdl () {
+	cd $1
+	ls
+}
 
 # Self-explanatory
 alias show-disk-space="df -H /dev/sda2"
