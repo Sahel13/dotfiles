@@ -47,7 +47,7 @@ Config {
 
         -- battery monitor
         , Run Battery        [ "--template" , "<fn=1></fn> <acstatus>"
-                             , "--Low"      , "15"        -- units: %
+                             , "--Low"      , "30"        -- units: %
                              , "--High"     , "80"        -- units: %
                              , "--low"      , "darkred"
 
