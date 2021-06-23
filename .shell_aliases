@@ -30,6 +30,7 @@ alias unblock-bluetooth="sudo rfkill unblock 1"
 alias ls="ls --color=auto -ogA"
 alias ..="cd ../"
 alias ...="cd ../../"
+alias rm="rm -rf"
 cdl () {
 	cd $1
 	ls

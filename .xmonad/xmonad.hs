@@ -79,6 +79,7 @@ myManageHook = composeAll
     , className =? "Anki" --> doShift "main"
     , className =? "Signal" --> doShift "chat"
     , className =? "TelegramDesktop" --> doShift "chat"
+    , className =? "discord" --> doShift "chat"
     , className =? "zoom" --> doShift "class"
     , className =? "vlc" --> doShift "misc"
     , className =? "Forticlientsslvpn" --> doShift "misc"
