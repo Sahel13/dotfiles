@@ -9,7 +9,7 @@
     <property name="inactivity-on-battery" type="uint" value="15"/>
     <property name="lid-action-on-battery" type="uint" value="1"/>
     <property name="logind-handle-lid-switch" type="bool" value="false"/>
-    <property name="critical-power-level" type="uint" value="20"/>
+    <property name="critical-power-level" type="uint" value="15"/>
     <property name="critical-power-action" type="uint" value="3"/>
     <property name="lock-screen-suspend-hibernate" type="bool" value="false"/>
     <property name="lid-action-on-ac" type="uint" value="1"/>
