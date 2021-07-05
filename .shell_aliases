@@ -11,6 +11,7 @@ alias pacman-uninstall="sudo pacman -Rns"
 alias pacman-update="sudo pacman -Syu"
 alias list-orphans="sudo pacman -Qtdq"
 alias cleanup-orphans="sudo pacman -Rns $(pacman -Qtdq)"
+alias get-mirrors="sudo systemctl start reflector.service"
 
 # AUR build
 alias aur-build="makepkg -si --rmdeps --clean"
@@ -38,15 +39,9 @@ cdl () {
 
 # Self-explanatory
 alias show-disk-space="df -H /dev/sda3"
-alias hardware-info="hwinfo --short"
-alias find-files="sudo find / -iname"
-alias find-word="grep -rw"
 alias netcheck="ping -c 3 archlinux.org"
-alias bresume="xbacklight -set 20"
 
 # Current
-alias class="cd ~/Documents/Course\ Work/"
-alias ml="cd ~/Projects/ml"
 alias lingaraj="ssh danush@10.10.0.181"
 
 # For backing up config files
