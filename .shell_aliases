@@ -11,7 +11,7 @@ alias pacman-uninstall="sudo pacman -Rns"
 alias pacman-update="sudo pacman -Syu"
 alias list-orphans="sudo pacman -Qtdq"
 alias cleanup-orphans="sudo pacman -Rns $(pacman -Qtdq)"
-alias get-mirrors="sudo systemctl start reflector.service"
+alias get-mirrors="sudo reflector --verbose --latest 10 --sort rate --download-timeout 60 --save /etc/pacman.d/mirrorlist"
 
 # AUR build
 alias aur-build="makepkg -si --rmdeps --clean"
@@ -26,6 +26,7 @@ alias block-wifi="sudo rfkill block 0"
 alias unblock-wifi="sudo rfkill unblock 0"
 alias block-bluetooth="sudo rfkill block 1"
 alias unblock-bluetooth="sudo rfkill unblock 1"
+alias reconnect="sudo systemctl restart NetworkManager.service"
 
 # File browsing
 alias ls="ls --color=auto -ogA"
