@@ -17,6 +17,10 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Cursor
 
+-- Scratchpads
+import XMonad.Util.NamedScratchpad
+import qualified XMonad.StackSet as W
+
 ------------------------------------------------------------------
 -- Main
 ------------------------------------------------------------------
@@ -83,7 +87,29 @@ myManageHook = composeAll
     , className =? "zoom" --> doShift "class"
     , className =? "vlc" --> doShift "misc"
     , className =? "Forticlientsslvpn" --> doShift "misc"
+    , namedScratchpadManageHook myScratchpads
     ]
+
+------------------------------------------------------------------
+-- Scratchpads
+------------------------------------------------------------------
+myScratchpads =
+    [ NS "terminal" spawnTerm findTerm manageTerm
+    , NS "network" spawnNetwork findNetwork manageNetwork 
+    , NS "htop" spawnHtop findHtop manageHtop 
+    ]
+  where
+    spawnTerm = myTerminal ++ " -t terminal"
+    findTerm = title =? "terminal"
+    manageTerm = customFloating $ W.RationalRect (1/4) (1/4) (1/2) (1/2)
+
+    spawnNetwork = myTerminal ++ " -t network -e nmtui"
+    findNetwork = title =? "network"
+    manageNetwork = customFloating $ W.RationalRect (1/4) (1/5) (2/4) (3/5)
+
+    spawnHtop = myTerminal ++ " -t htop -e htop"
+    findHtop = title =? "htop"
+    manageHtop = customFloating $ W.RationalRect (1/12) (1/6) (10/12) (4/6)
 
 ------------------------------------------------------------------
 -- Variables
@@ -108,9 +134,11 @@ myKeys =
     -- Utilities
     , ("M-d", spawn "dmenu_run")
     , ("M-s", spawn "flameshot gui")
-    , ("M-S-n", spawn (myTerminal ++ " -e nmtui"))
-    , ("M-S-h", spawn (myTerminal ++ " -e htop"))
     , ("M-S-b", spawn "blueman-manager")
+        -- Scratchpads
+    , ("M-C-<Return>", namedScratchpadAction myScratchpads "terminal")
+    , ("M-S-n", namedScratchpadAction myScratchpads "network")
+    , ("M-S-h", namedScratchpadAction myScratchpads "htop")
 
     -- Applications
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
