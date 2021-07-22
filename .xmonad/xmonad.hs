@@ -72,7 +72,7 @@ myStartupHook = do
 ------------------------------------------------------------------
 -- Layout
 ------------------------------------------------------------------
-myLayoutHook = smartBorders ((spacingRaw False (Border 5 0 5 0) True (Border 0 5 0 5) True $ Tall 1 (3/100) (1/2)) ||| Full)
+myLayoutHook = smartBorders ((spacingRaw False (Border 10 0 10 0) True (Border 0 10 0 10) True $ Tall 1 (3/100) (1/2)) ||| Full)
 
 ------------------------------------------------------------------
 -- Window rules

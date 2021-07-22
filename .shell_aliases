@@ -14,7 +14,14 @@ alias cleanup-orphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias get-mirrors="sudo reflector --verbose --latest 10 --sort rate --download-timeout 60 --save /etc/pacman.d/mirrorlist"
 
 # AUR build
-alias aur-build="makepkg -si --rmdeps --clean"
+alias aur="cd Public/aur/"
+function aur-install () {
+	cd ~/Public/aur/
+	git clone ${1:?Git clone URL} ${2:?Folder name}
+	cd $2
+	makepkg -si --needed --noconfirm --rmdeps --clean
+	cd ~/
+}
 
 # Configuration files
 alias zsh-config="vim ~/.zshrc"
@@ -39,11 +46,15 @@ cdl () {
 }
 
 # Self-explanatory
-alias show-disk-space="df -H /dev/sda3"
+alias show-disk-space="df -H /dev/sda2"
 alias netcheck="ping -c 3 archlinux.org"
+format-pendrive () {
+	sudo mkfs.vfat -n $1 -I $2
+}
 
 # Current
 alias lingaraj="ssh danush@10.10.0.181"
+alias danush="ssh danush@10.0.26.247"
 
 # For backing up config files
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
