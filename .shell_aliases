@@ -19,7 +19,7 @@ function aur-install () {
 	cd ~/Public/aur/
 	git clone ${1:?Git clone URL} ${2:?Folder name}
 	cd $2
-	makepkg -si --needed --noconfirm --rmdeps --clean
+	makepkg -si --needed --rmdeps --clean
 	cd ~/
 }
 
@@ -46,7 +46,7 @@ cdl () {
 }
 
 # Self-explanatory
-alias show-disk-space="df -H /dev/sda2"
+alias show-disk-space="df -H /dev/sda3"
 alias netcheck="ping -c 3 archlinux.org"
 format-pendrive () {
 	sudo mkfs.vfat -n $1 -I $2
