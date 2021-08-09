@@ -15,7 +15,7 @@ alias get-mirrors="sudo reflector --verbose --latest 10 --sort rate --download-t
 
 # AUR build
 alias aur="cd Public/aur/"
-function aur-install () {
+aur-install () {
 	cd ~/Public/aur/
 	git clone ${1:?Git clone URL} ${2:?Folder name}
 	cd $2
@@ -49,6 +49,7 @@ cdl () {
 alias show-disk-space="df -H /dev/sda3"
 alias netcheck="ping -c 3 archlinux.org"
 format-pendrive () {
+	sudo umount $2
 	sudo mkfs.vfat -n $1 -I $2
 }
 

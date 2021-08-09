@@ -20,7 +20,18 @@
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "[html]": {
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
   "[css]": {
+    "editor.suggest.insertMode": "replace",
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "[scss]": {
     "editor.suggest.insertMode": "replace",
     "editor.detectIndentation": false,
     "editor.insertSpaces": true,
@@ -56,10 +67,15 @@
     "editor.tabSize": 2
   },
   "editor.minimap.enabled": false,
-  "workbench.editorAssociations": [
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb"
+  },
+  "workbench.colorTheme": "Default Dark+",
+  "liveSassCompile.settings.formats": [
     {
-      "viewType": "jupyter.notebook.ipynb",
-      "filenamePattern": "*.ipynb"
+      "format": "compressed",
+      "extensionName": ".min.css",
+      "savePath": "~/../css/"
     }
   ]
 }

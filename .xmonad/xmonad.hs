@@ -56,6 +56,18 @@ myPP = xmobarPP
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 ------------------------------------------------------------------
+-- Variables
+------------------------------------------------------------------
+myWorkspaces :: [String]
+myWorkspaces = ["main", "work", "web", "chat", "class", "misc"]
+
+myTerminal :: String
+myTerminal = "alacritty"
+
+mySpacing :: Integer
+mySpacing = 5
+
+------------------------------------------------------------------
 -- Autostart
 ------------------------------------------------------------------
 myStartupHook :: X ()
@@ -72,7 +84,7 @@ myStartupHook = do
 ------------------------------------------------------------------
 -- Layout
 ------------------------------------------------------------------
-myLayoutHook = smartBorders ((spacingRaw False (Border 10 0 10 0) True (Border 0 10 0 10) True $ Tall 1 (3/100) (1/2)) ||| Full)
+myLayoutHook = smartBorders ((spacingRaw False (Border mySpacing 0 mySpacing 0) True (Border 0 mySpacing 0 mySpacing) True $ Tall 1 (3/100) (1/2)) ||| Full)
 
 ------------------------------------------------------------------
 -- Window rules
@@ -110,15 +122,6 @@ myScratchpads =
     spawnHtop = myTerminal ++ " -t htop -e htop"
     findHtop = title =? "htop"
     manageHtop = customFloating $ W.RationalRect (1/12) (1/6) (10/12) (4/6)
-
-------------------------------------------------------------------
--- Variables
-------------------------------------------------------------------
-myWorkspaces :: [String]
-myWorkspaces = ["main", "work", "web", "chat", "class", "misc"]
-
-myTerminal :: String
-myTerminal = "alacritty"
 
 ------------------------------------------------------------------
 -- Keybindings
