@@ -3,8 +3,8 @@ Config {
    -- appearance
      font =         "xft:Ubuntu Mono:size=11:bold:antialias=true"
 	, additionalFonts = ["xft:Font Awesome 5 Free Solid:style=Solid:size=11:bold:antialias=true"]
-   , bgColor =      "black"
-   , fgColor =      "#968c83"
+   , bgColor =      "#1d1d1d"
+   , fgColor =      "#afb1af"
    , position =     Top
 
    -- layout

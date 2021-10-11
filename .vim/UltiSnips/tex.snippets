@@ -2,8 +2,6 @@ snippet template "A standard template for lab reports"
 \documentclass[12pt, a4paper]{article}
 
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{physics}
 \usepackage{graphicx}
 
 \setlength{\parindent}{3em}
@@ -86,7 +84,7 @@ endsnippet
 snippet figure
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=${1:10}cm]{${2:file_name}}
+	\includegraphics[width=$1\textwidth]{${2:file_name}}
 	\caption{$3}
 	\label{fig:$4}
 \end{figure}
@@ -112,9 +110,6 @@ snippet presentation "New presentation"
 \documentclass{beamer}
 
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{physics}
-\usepackage{graphicx}
 
 \usetheme{Madrid}
 
@@ -136,17 +131,25 @@ snippet presentation "New presentation"
 
 $2
 
-\bibliographystyle{abbrv}
+\bibliographystyle{unsrt}
 \bibliography{references}
 
 \end{document}
 endsnippet
 
-snippet slide "New slide"
+snippet frame
 \begin{frame}
 	\frametitle{${1:title}}
-	\begin{itemize}
-		\item $2
-	\end{itemize}
+	$2
 \end{frame}
+endsnippet
+
+snippet block
+\begin{block}{${1:blocktitle}}
+	${2:content}
+\end{block}
+endsnippet
+
+snippet cite
+\cite{$1}$2
 endsnippet

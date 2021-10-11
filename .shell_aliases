@@ -4,6 +4,9 @@ alias vim="nvim"
 # Accessing this file
 alias aliases="vim ~/.shell_aliases"
 
+# For backing up config files
+alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
 # Package management (pacman)
 alias pacman-install="sudo pacman -S --needed"
 alias pacman-info="sudo pacman -Qi"
@@ -22,6 +25,7 @@ aur-install () {
 	makepkg -si --needed --rmdeps --clean
 	cd ~/
 }
+alias aur-update="makepkg -si --needed --rmdeps --clean"
 
 # Configuration files
 alias zsh-config="vim ~/.zshrc"
@@ -53,9 +57,10 @@ format-pendrive () {
 	sudo mkfs.vfat -n $1 -I $2
 }
 
+alias night-mode="redshift -P -O 4500"
+
 # Current
 alias lingaraj="ssh danush@10.10.0.181"
-alias danush="ssh danush@10.0.26.247"
-
-# For backing up config files
-alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias durga="ssh sahel@10.0.2.38"
+alias localpc="ssh danush@10.0.2.42"
+alias project="vim ~/Documents/project/draft/main.tex"

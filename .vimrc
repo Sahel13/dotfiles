@@ -84,3 +84,6 @@ vmap <C-v> c<ESC>"+p
 
 "Stop backup and swap files
 set nobackup noswapfile
+
+"Needed for neovim
+let g:python3_host_prog = '/usr/bin/python3'

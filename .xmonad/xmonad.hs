@@ -7,6 +7,7 @@ import System.Exit (exitSuccess)
 -- Hooks
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 
 -- Layouts
 import XMonad.Layout.Spacing
@@ -14,12 +15,37 @@ import XMonad.Layout.NoBorders (smartBorders)
 
 -- Utilities
 import XMonad.Util.SpawnOnce
-import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Cursor
+
+-- Keybindings
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Actions.Submap
 
 -- Scratchpads
 import XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
+
+-- Multi-monitor support
+import XMonad.Actions.CycleWS (nextScreen, prevScreen)
+
+------------------------------------------------------------------
+-- Variables
+------------------------------------------------------------------
+myWorkspaces :: [String]
+myWorkspaces = ["main", "work", "web", "chat", "misc"]
+
+myTerminal :: String
+myTerminal = "alacritty"
+
+mySpacing :: Integer
+mySpacing = 5
+
+-- Colors for the bar
+primaryColor :: String
+primaryColor = "#f1600e"
+
+secondaryColor :: String
+secondaryColor = "#f4803e"
 
 ------------------------------------------------------------------
 -- Main
@@ -40,32 +66,20 @@ myConfig = defaultConfig
     , startupHook = myStartupHook
     , layoutHook = myLayoutHook
     , manageHook = myManageHook
+    , handleEventHook = fullscreenEventHook
     } `additionalKeysP` myKeys
 
 ------------------------------------------------------------------
 -- Xmobar
 ------------------------------------------------------------------
--- Colors for the bar
 myPP = xmobarPP
-    { ppCurrent = xmobarColor "#ffa07a" "" . wrap "[" "]"
-    , ppHidden = xmobarColor "#ffd9c9" ""
-    , ppTitle = xmobarColor "#ffa07a" "" . shorten 60
+    { ppCurrent = xmobarColor primaryColor "" . wrap "[" "]"
+    , ppHidden = xmobarColor secondaryColor ""
+    , ppTitle = xmobarColor primaryColor "" . shorten 60
     }
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
-
-------------------------------------------------------------------
--- Variables
-------------------------------------------------------------------
-myWorkspaces :: [String]
-myWorkspaces = ["main", "work", "web", "chat", "class", "misc"]
-
-myTerminal :: String
-myTerminal = "alacritty"
-
-mySpacing :: Integer
-mySpacing = 5
 
 ------------------------------------------------------------------
 -- Autostart
@@ -93,10 +107,11 @@ myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
     , className =? "Mendeley Desktop" --> doShift "main"
     , className =? "Anki" --> doShift "main"
+    , className =? "zoom" --> doShift "main"
+    , className =? "zoom" --> doFloat
     , className =? "Signal" --> doShift "chat"
     , className =? "TelegramDesktop" --> doShift "chat"
     , className =? "discord" --> doShift "chat"
-    , className =? "zoom" --> doShift "class"
     , className =? "vlc" --> doShift "misc"
     , className =? "Forticlientsslvpn" --> doShift "misc"
     , namedScratchpadManageHook myScratchpads
@@ -143,20 +158,28 @@ myKeys =
     , ("M-S-n", namedScratchpadAction myScratchpads "network")
     , ("M-S-h", namedScratchpadAction myScratchpads "htop")
 
+    -- Multi-monitor support
+    , ("M-.", nextScreen)
+    , ("M-,", prevScreen)
+
     -- Applications
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
     , ("M1-S-<Return>", spawn "thunar")
-    , ("M-M1-f", spawn "firefox")
+    , ("M-M1-f w", spawn "firefox -P 'Work'")
+    , ("M-M1-f p", spawn "firefox -P 'Personal'")
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-t", spawn "telegram-desktop")
     , ("M-M1-d", spawn "discord")
     , ("M-M1-a", spawn "anki")
     , ("M-M1-m", spawn "mendeleydesktop")
     , ("M-M1-z", spawn "zoom")
+    , ("M-M1-c", spawn "firefox -P 'Personal' 'https://calendar.protonmail.com/u/1/'")
 
     -- Email
-    , ("M-M1-p", spawn ("firefox" ++ " https://account.protonmail.com/switch"))
-    , ("M-M1-g", spawn ("firefox" ++ " https://mail.google.com/mail/u/0/#inbox"))
+    , ("M-M1-p 1", spawn "firefox -P 'Personal' 'https://mail.protonmail.com/u/0/inbox'")
+    , ("M-M1-p 2", spawn "firefox -P 'Personal' 'https://mail.protonmail.com/u/1/inbox'")
+    , ("M-M1-g w", spawn "firefox -P 'Work' 'https://mail.google.com/mail/u/0/#inbox'")
+    , ("M-M1-g p", spawn "firefox -P 'Personal' 'https://mail.google.com/mail/u/0/#inbox'")
 
     -- Function keys
     , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2")
