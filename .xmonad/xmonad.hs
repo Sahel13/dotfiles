@@ -32,7 +32,7 @@ import XMonad.Actions.CycleWS (nextScreen, prevScreen)
 -- Variables
 ------------------------------------------------------------------
 myWorkspaces :: [String]
-myWorkspaces = ["main", "work", "web", "chat", "misc"]
+myWorkspaces = ["main", "work", "web", "code", "chat", "misc"]
 
 myTerminal :: String
 myTerminal = "alacritty"
@@ -106,14 +106,12 @@ myLayoutHook = smartBorders ((spacingRaw False (Border mySpacing 0 mySpacing 0) 
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
     , className =? "Mendeley Desktop" --> doShift "main"
-    , className =? "Anki" --> doShift "main"
-    , className =? "zoom" --> doShift "main"
+    , className =? "zoom" --> doShift "misc"
     , className =? "zoom" --> doFloat
     , className =? "Signal" --> doShift "chat"
     , className =? "TelegramDesktop" --> doShift "chat"
     , className =? "discord" --> doShift "chat"
     , className =? "vlc" --> doShift "misc"
-    , className =? "Forticlientsslvpn" --> doShift "misc"
     , namedScratchpadManageHook myScratchpads
     ]
 
@@ -158,7 +156,7 @@ myKeys =
     , ("M-S-n", namedScratchpadAction myScratchpads "network")
     , ("M-S-h", namedScratchpadAction myScratchpads "htop")
 
-    -- Multi-monitor support
+    -- Multi-monitor navigation
     , ("M-.", nextScreen)
     , ("M-,", prevScreen)
 
@@ -170,10 +168,9 @@ myKeys =
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-t", spawn "telegram-desktop")
     , ("M-M1-d", spawn "discord")
-    , ("M-M1-a", spawn "anki")
     , ("M-M1-m", spawn "mendeleydesktop")
     , ("M-M1-z", spawn "zoom")
-    , ("M-M1-c", spawn "firefox -P 'Personal' 'https://calendar.protonmail.com/u/1/'")
+    , ("M-M1-c", spawn "firefox -P 'Personal' 'https://calendar.protonmail.com/u/0/'")
 
     -- Email
     , ("M-M1-p 1", spawn "firefox -P 'Personal' 'https://mail.protonmail.com/u/0/inbox'")

@@ -77,5 +77,6 @@
       "extensionName": ".min.css",
       "savePath": "~/../css/"
     }
-  ]
+  ],
+  "jupyter.askForKernelRestart": false
 }
