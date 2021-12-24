@@ -42,10 +42,10 @@ mySpacing = 5
 
 -- Colors for the bar
 primaryColor :: String
-primaryColor = "#f1600e"
+primaryColor = "#32827f"
 
 secondaryColor :: String
-secondaryColor = "#f4803e"
+secondaryColor = "#32827f"
 
 ------------------------------------------------------------------
 -- Main
@@ -60,7 +60,7 @@ myConfig = defaultConfig
     , focusFollowsMouse = False
     , borderWidth = 1
     , normalBorderColor = "#000000"
-    , focusedBorderColor = "#ffd9c9"
+    , focusedBorderColor = "#1693CF"
     , workspaces = myWorkspaces
     -- Hooks
     , startupHook = myStartupHook
@@ -106,8 +106,6 @@ myLayoutHook = smartBorders ((spacingRaw False (Border mySpacing 0 mySpacing 0) 
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
     , className =? "Mendeley Desktop" --> doShift "main"
-    , className =? "zoom" --> doShift "misc"
-    , className =? "zoom" --> doFloat
     , className =? "Signal" --> doShift "chat"
     , className =? "TelegramDesktop" --> doShift "chat"
     , className =? "discord" --> doShift "chat"
@@ -126,7 +124,7 @@ myScratchpads =
   where
     spawnTerm = myTerminal ++ " -t terminal"
     findTerm = title =? "terminal"
-    manageTerm = customFloating $ W.RationalRect (1/4) (1/4) (1/2) (1/2)
+    manageTerm = customFloating $ W.RationalRect (1/5) (1/5) (3/5) (3/5)
 
     spawnNetwork = myTerminal ++ " -t network -e nmtui"
     findNetwork = title =? "network"
@@ -169,7 +167,6 @@ myKeys =
     , ("M-M1-t", spawn "telegram-desktop")
     , ("M-M1-d", spawn "discord")
     , ("M-M1-m", spawn "mendeleydesktop")
-    , ("M-M1-z", spawn "zoom")
     , ("M-M1-c", spawn "firefox -P 'Personal' 'https://calendar.protonmail.com/u/0/'")
 
     -- Email

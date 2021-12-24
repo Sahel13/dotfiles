@@ -61,8 +61,7 @@ alias night-mode="redshift -P -O 4500"
 
 # Current
 alias lingaraj="ssh sahel@10.10.0.181"
-alias durga="ssh sahel@10.0.2.38"
-alias localpc="ssh danush@10.0.2.42"
-alias paper="cd ~/Documents/project/manuscript/"
+alias durga="ssh sahel@10.10.0.182"
+alias localpc="ssh sahel@10.0.2.42"
 
 alias gpustat="nvidia-smi -lms 5000"
