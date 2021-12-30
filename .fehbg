@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-scale --randomize ~/Arch/Wallpapers/*
+feh --no-fehbg --bg-scale /usr/share/backgrounds/archlinux/simple.png

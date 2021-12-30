@@ -3,8 +3,9 @@ set nocompatible
 "Plugins using vim-plug
 call plug#begin('~/.vim/plugged')
 
-Plug 'lervag/vimtex'
-Plug 'SirVer/ultisnips'
+Plug 'lervag/vimtex' "Latex support
+Plug 'SirVer/ultisnips' "Snippets
+Plug 'cloudhead/neovim-fuzzy' "Fuzzy file search
 
 call plug#end()
 
@@ -51,9 +52,6 @@ inoremap jk <ESC>
 "Remap semicolon to colon
 nnoremap ; :
 
-"Run python code
-cnoremap run w<Space>!python
-
 "Set leader key
 nnoremap <Space> <nop>
 let mapleader = "\<Space>"
@@ -87,3 +85,7 @@ set nobackup noswapfile
 
 "Needed for neovim
 let g:python3_host_prog = '/usr/bin/python3'
+
+"Fuzzy file search (Ctrl-/)
+nnoremap <C-_> :FuzzyOpen<CR>
+
