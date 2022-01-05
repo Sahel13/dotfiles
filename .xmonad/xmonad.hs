@@ -60,7 +60,7 @@ myConfig = defaultConfig
     , focusFollowsMouse = False
     , borderWidth = 1
     , normalBorderColor = "#000000"
-    , focusedBorderColor = "#1693CF"
+    , focusedBorderColor = "#076678"
     , workspaces = myWorkspaces
     -- Hooks
     , startupHook = myStartupHook
@@ -166,7 +166,7 @@ myKeys =
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-t", spawn "telegram-desktop")
     , ("M-M1-d", spawn "discord")
-    , ("M-M1-m", spawn "mendeleydesktop")
+    , ("M-M1-m", spawn "mendeley-reference-manager")
     , ("M-M1-c", spawn "firefox -P 'Personal' 'https://calendar.protonmail.com/u/0/'")
 
     -- Email

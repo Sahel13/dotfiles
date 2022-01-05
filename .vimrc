@@ -1,16 +1,24 @@
 set nocompatible
+set encoding=utf-8
 
-"Plugins using vim-plug
+" -----------------------
+" Plugins using vim-plug.
+" -----------------------
+
 call plug#begin('~/.vim/plugged')
 
+Plug 'gruvbox-community/gruvbox' "Gruvbox theme
 Plug 'lervag/vimtex' "Latex support
 Plug 'SirVer/ultisnips' "Snippets
 Plug 'cloudhead/neovim-fuzzy' "Fuzzy file search
 
 call plug#end()
 
-"Set encoding
-set enc=utf-8
+" ---------------------
+" Plugin configuration.
+" ---------------------
+
+colorscheme gruvbox
 
 "Vimtex
 let g:vimtex_compiler_latexmk = {
@@ -22,41 +30,62 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-"Keep cursor at the center of the screen
-set scrolloff=20
+"Fuzzy file search (Ctrl-/)
+nnoremap <silent> <C-_> :FuzzyOpen<CR>
 
-"Set 256 colors
-set t_Co=256
+" ---------------
+" Other settings.
+" ---------------
 
-"Theme settings
-let g:gruvbox_contrast_dark = 'dark'
-colorscheme gruvbox
-set background=dark
+"Keep the cursor at the center of the screen.
+set scrolloff=100
 
-"Make backspace work proper
+"Make backspace work proper.
 set backspace=indent,eol,start
 
-"Enabling file specific plugins and syntax highlighting
+"Enable file specific plugins and syntax highlighting.
 filetype indent plugin on
 syntax on
 
-"Show line numbers
-set number
+set number "Show line numbers.
+set showcmd "Show commands.
+set cursorline "Highlight the line with the cursor.
 
-"Enable all python syntax highlighting features
+"Enable all python syntax highlighting features.
 let g:python_highlight_all = 1
 
-"Remap esc key in insert mode
-inoremap jk <ESC>
+"Enable smart search.
+set ignorecase
+set smartcase
 
-"Remap semicolon to colon
-nnoremap ; :
+"No backup and swap files.
+set nobackup noswapfile
 
-"Set leader key
+"Needed for neovim.
+let g:python3_host_prog = '/usr/bin/python3'
+
+"2 spaces are used for indentation by default.
+setlocal tabstop=2
+setlocal softtabstop=2
+setlocal shiftwidth=2
+setlocal smarttab
+setlocal expandtab
+
+" ------------
+" Keybindings.
+" ------------
+
+"Set leader key to spacebar.
 nnoremap <Space> <nop>
 let mapleader = "\<Space>"
 
-"Split navigations
+"Map jk to esc key in insert mode.
+inoremap jk <ESC>
+
+"Map semicolon to colon.
+nnoremap ; :
+
+"Split navigation.
 set splitbelow
 set splitright
 nnoremap <C-J> <C-W><C-J>
@@ -64,28 +93,18 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-"Enabling smart search
-set ignorecase
-set smartcase
+"Tab navigation.
+nnoremap <silent> <C-n> :tabnext<CR>
+nnoremap <silent> <C-p> :tabprevious<CR>
 
-set showcmd "Show commands
-set cursorline "Highlight the line with cursor
-
-"Move vertically by visual line
+"Move vertically by visual line.
 nnoremap j gj
 nnoremap k gk
 
-"Copy to the system clipboard
-"Only works in visual mode
-vmap <C-c> "+y<ESC>
-vmap <C-v> c<ESC>"+p
+"Copy to and paste from the system clipboard.
+vnoremap <C-c> "+y<ESC>
+vnoremap <C-v> c<ESC>"+p
 
-"Stop backup and swap files
-set nobackup noswapfile
-
-"Needed for neovim
-let g:python3_host_prog = '/usr/bin/python3'
-
-"Fuzzy file search (Ctrl-/)
-nnoremap <C-_> :FuzzyOpen<CR>
+"Toggle spellcheck.
+nnoremap <silent> <leader>s :setlocal spell! spelllang=en_us<CR>
 
