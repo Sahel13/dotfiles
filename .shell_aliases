@@ -16,17 +16,6 @@ alias list-orphans="sudo pacman -Qtdq"
 alias cleanup-orphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias get-mirrors="sudo reflector --verbose --latest 10 --sort rate --download-timeout 60 --save /etc/pacman.d/mirrorlist"
 
-# AUR build
-alias aur="cd Public/aur/"
-aur-install () {
-	cd ~/Public/aur/
-	git clone ${1:?Git clone URL} ${2:?Folder name}
-	cd $2
-	makepkg -si --needed --rmdeps --clean
-	cd ~/
-}
-alias aur-update="makepkg -si --needed --rmdeps --clean"
-
 # Configuration files
 alias zsh-config="vim ~/.zshrc"
 alias vim-config="vim ~/.vimrc"
@@ -50,7 +39,7 @@ cdl () {
 }
 
 # Self-explanatory
-alias show-disk-space="df -H /dev/sda3"
+alias show-disk-space="df -H /dev/sda3 /dev/sda4"
 alias netcheck="ping -c 3 archlinux.org"
 format-pendrive () {
 	sudo umount $2
@@ -64,4 +53,4 @@ alias lingaraj="ssh sahel@10.10.0.181"
 alias durga="ssh sahel@10.10.0.182"
 alias localpc="ssh sahel@10.0.2.42"
 
-alias gpustat="nvidia-smi -lms 5000"
+alias gpus="nvidia-smi -lms 5000"

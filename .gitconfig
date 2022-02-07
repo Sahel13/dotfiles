@@ -1,11 +1,11 @@
 [user]
-	name = Sahel Mohammad Iqbal
-	email = sahel13miqbal@protonmail.ch
+  name = Sahel Mohammad Iqbal
+  email = sahel13miqbal@protonmail.ch
 [core]
-	editor = nvim
+  editor = nvim
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [pull]
-	rebase = false
+  rebase = false
 [credential]
-	helper = /usr/lib/git-core/git-credential-libsecret
+  helper = /usr/lib/git-core/git-credential-libsecret

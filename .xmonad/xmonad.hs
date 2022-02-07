@@ -58,7 +58,7 @@ myConfig = defaultConfig
     { modMask = mod4Mask
     , terminal = myTerminal
     , focusFollowsMouse = False
-    , borderWidth = 1
+    , borderWidth = 3
     , normalBorderColor = "#000000"
     , focusedBorderColor = "#076678"
     , workspaces = myWorkspaces
@@ -105,7 +105,7 @@ myLayoutHook = smartBorders ((spacingRaw False (Border mySpacing 0 mySpacing 0) 
 ------------------------------------------------------------------
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
-    , className =? "Mendeley Desktop" --> doShift "main"
+    , className =? "Mendeley Reference Manager" --> doShift "main"
     , className =? "Signal" --> doShift "chat"
     , className =? "TelegramDesktop" --> doShift "chat"
     , className =? "discord" --> doShift "chat"
@@ -168,6 +168,7 @@ myKeys =
     , ("M-M1-d", spawn "discord")
     , ("M-M1-m", spawn "mendeley-reference-manager")
     , ("M-M1-c", spawn "firefox -P 'Personal' 'https://calendar.protonmail.com/u/0/'")
+    , ("M-M1-v", spawn "vivaldi-stable")
 
     -- Email
     , ("M-M1-p 1", spawn "firefox -P 'Personal' 'https://mail.protonmail.com/u/0/inbox'")

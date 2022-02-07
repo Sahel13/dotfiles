@@ -1,8 +1,9 @@
-snippet template "A standard template for lab reports"
+snippet template "A standard template for latex files."
 \documentclass[12pt, a4paper]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{amsmath}
 
 \setlength{\parindent}{3em}
 \setlength{\parskip}{0.5em}
@@ -13,6 +14,15 @@ snippet template "A standard template for lab reports"
 	height=9in,
 	width=6in
 }
+
+% Hyperlink support.
+\usepackage[breaklinks,colorlinks]{hyperref}
+
+% Support for easy cross-referencing.
+\usepackage[capitalize]{cleveref}
+\crefname{section}{Sec.}{Secs.}
+\crefname{table}{Tab.}{Tabs.}
+\crefname{equation}{Eq.}{Eqs.}
 
 % Use biblatex for reference management
 \usepackage[style=nature, sorting=none]{biblatex}
@@ -34,31 +44,32 @@ endsnippet
 
 snippet section
 \section{$1}
-\label{sec:$2}
 endsnippet
 
 snippet sub
 \subsection{$1}
-\label{subsec:$2}
 endsnippet
 
 snippet subsub
 \subsubsection{$1}
-\label{subsubsec:$2}
 endsnippet
 
 snippet equation
 \begin{equation}
 	$1
-	\label{eq:$2}
 \end{equation}
 endsnippet
 
 snippet align
 \begin{align}
 	$1
-	\label{eq:$2}
 \end{align}
+endsnippet
+
+snippet align*
+\begin{align*}
+	$1
+\end{align*}
 endsnippet
 
 snippet frac "Fraction"
@@ -80,7 +91,7 @@ endsnippet
 snippet figure
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=$1\textwidth]{${2:file_name}}
+	\includegraphics[width=$1\textwidth]{images/${2:file_name}}
 	\caption{$3}
 	\label{fig:$4}
 \end{figure}
@@ -154,5 +165,16 @@ snippet block
 endsnippet
 
 snippet cite
-\cite{$1}$2
+\cite{$1}
+endsnippet
+
+snippet columns
+\begin{columns}
+	\begin{column}{${1:0.5}\textwidth}
+		$2
+	\end{column}
+	\begin{column}{${3:0.5}\textwidth}
+		$4
+	\end{column}
+\end{columns}
 endsnippet

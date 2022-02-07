@@ -8,6 +8,7 @@ set encoding=utf-8
 call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox' "Gruvbox theme
+Plug 'vim-airline/vim-airline' "Status bar
 Plug 'lervag/vimtex' "Latex support
 Plug 'SirVer/ultisnips' "Snippets
 Plug 'cloudhead/neovim-fuzzy' "Fuzzy file search
@@ -18,19 +19,36 @@ call plug#end()
 " Plugin configuration.
 " ---------------------
 
+" --- gruvbox ---
+set background=dark
+let g:gruvbox_contrast_dark = 'medium'
 colorscheme gruvbox
+set termguicolors
 
-"Vimtex
+" --- vim-airline ---
+let g:airline_powerline_fonts = 1
+
+" --- vimtex ---
+let maplocalleader = "\<Space>"
+let g:vimtex_quickfix_mode = 0
+
+"Put build files in a folder.
 let g:vimtex_compiler_latexmk = {
-	\ 'build_dir' : 'build_dir',
-	\}
+  \ 'build_dir' : 'build_dir',
+  \}
 
-"UltiSnips
+"For the metropolis beamer theme.
+" let g:vimtex_compiler_latexmk_engines = {
+"   \ '_' : '-lualatex',
+"   \}
+
+" --- ultinnips ---
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-"Fuzzy file search (Ctrl-/)
+" --- neovim-fuzzy ---
+" Ctrl-/ to trigger search.
 nnoremap <silent> <C-_> :FuzzyOpen<CR>
 
 " ---------------
@@ -65,11 +83,11 @@ set nobackup noswapfile
 let g:python3_host_prog = '/usr/bin/python3'
 
 "2 spaces are used for indentation by default.
-setlocal tabstop=2
-setlocal softtabstop=2
-setlocal shiftwidth=2
-setlocal smarttab
-setlocal expandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set smarttab
+set expandtab
 
 " ------------
 " Keybindings.
@@ -107,4 +125,3 @@ vnoremap <C-v> c<ESC>"+p
 
 "Toggle spellcheck.
 nnoremap <silent> <leader>s :setlocal spell! spelllang=en_us<CR>
-
