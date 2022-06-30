@@ -29,13 +29,13 @@ alias unblock-bluetooth="sudo rfkill unblock 1"
 alias reconnect="sudo systemctl restart NetworkManager.service"
 
 # File browsing
-alias ls="ls --color=auto -ogA"
+alias la="ls --color=auto -ogA"
 alias ..="cd ../"
 alias ...="cd ../../"
 alias rm="rm -rf"
 cdl () {
 	cd $1
-	ls
+	la
 }
 
 # Self-explanatory
@@ -54,3 +54,5 @@ alias durga="ssh sahel@10.10.0.182"
 alias localpc="ssh sahel@10.0.2.42"
 
 alias gpus="nvidia-smi -lms 5000"
+
+alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'

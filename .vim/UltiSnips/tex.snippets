@@ -42,6 +42,12 @@ $3
 \end{document}
 endsnippet
 
+snippet begin "For generic environments."
+\begin{$1}
+	$2
+\end{$1}
+endsnippet
+
 snippet section
 \section{$1}
 endsnippet
@@ -66,13 +72,7 @@ snippet align
 \end{align}
 endsnippet
 
-snippet align*
-\begin{align*}
-	$1
-\end{align*}
-endsnippet
-
-snippet frac "Fraction"
+snippet frac
 \frac{$1}{$2}
 endsnippet
 
@@ -113,7 +113,7 @@ snippet subfigure
 \end{figure}
 endsnippet
 
-snippet presentation "New presentation"
+snippet presentation "New beamer presentation."
 \documentclass{beamer}
 
 \usepackage[utf8]{inputenc}
@@ -151,7 +151,7 @@ $2
 \end{document}
 endsnippet
 
-snippet frame
+snippet frame "Frame for beamer slides."
 \begin{frame}
 	\frametitle{${1:title}}
 	$2
