@@ -2,15 +2,15 @@ Config {
 
    -- appearance
      font =         "xft:Ubuntu Mono:size=11:bold:antialias=true"
-	, additionalFonts = ["xft:Font Awesome 5 Free Solid:style=Solid:size=11:bold:antialias=true"]
+	, additionalFonts = ["xft:Font Awesome 6 Free Solid:style=Solid:size=11:bold:antialias=true"]
    , bgColor =      "#1d1d1d"
    , fgColor =      "#afb1af"
-   , position =     Top
+   , position =     Top  -- TopW L 90
 
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%StdinReader% }{ %battery% | %multicpu% | %coretemp% | %memory% | %date% "
+   , template = "%XMonadLog% }{ %battery% | %multicpu% | %coretemp% | %memory% | %alsa:default:Master% | %date% "
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -22,7 +22,7 @@ Config {
 
    -- plugins
    , commands = 
-	[ Run StdinReader
+	[ Run XMonadLog
 
         -- cpu activity monitor
         , Run MultiCpu       [ "--template" , "<fn=1></fn> <total0>%"
@@ -44,6 +44,14 @@ Config {
                              , "--High"     , "90"        -- units: %
                              , "--high"     , "darkred"
                              ] 10
+
+      -- sound
+      , Run Alsa "default" "Master"
+                              [ "--template", "<fn=1></fn> <volumestatus>"
+                              , "--suffix"  , "True"
+                              , "--"
+                              , "--on", ""
+                              ]
 
         -- battery monitor
         , Run Battery        [ "--template" , "<fn=1></fn> <acstatus>"

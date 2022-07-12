@@ -6,8 +6,9 @@ import System.Exit (exitSuccess)
 
 -- Hooks
 import XMonad.Hooks.SetWMName
-import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
 
 -- Layouts
 import XMonad.Layout.Spacing
@@ -40,20 +41,18 @@ myTerminal = "alacritty"
 mySpacing :: Integer
 mySpacing = 5
 
--- Colors for the bar
-primaryColor :: String
-primaryColor = "#32827f"
-
-secondaryColor :: String
-secondaryColor = "#32827f"
-
 ------------------------------------------------------------------
 -- Main
 ------------------------------------------------------------------
-main = xmonad =<< statusBar "xmobar" myPP toggleStrutsKey myConfig
+main :: IO ()
+main = xmonad
+     . ewmhFullscreen
+     . ewmh
+     . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
+     $ myConfig
 
 -- Configuration
-myConfig = defaultConfig
+myConfig = def
     -- General settings
     { modMask = mod4Mask
     , terminal = myTerminal
@@ -66,20 +65,19 @@ myConfig = defaultConfig
     , startupHook = myStartupHook
     , layoutHook = myLayoutHook
     , manageHook = myManageHook
-    , handleEventHook = fullscreenEventHook
     } `additionalKeysP` myKeys
 
 ------------------------------------------------------------------
 -- Xmobar
 ------------------------------------------------------------------
-myPP = xmobarPP
-    { ppCurrent = xmobarColor primaryColor "" . wrap "[" "]"
-    , ppHidden = xmobarColor secondaryColor ""
-    , ppTitle = xmobarColor primaryColor "" . shorten 60
+myXmobarPP :: PP
+myXmobarPP = def
+    { ppCurrent = accentColor . wrap "[" "]"
+    , ppHidden = accentColor
+    , ppTitle = accentColor . shorten 40
     }
-
--- Key binding to toggle the gap for the bar.
-toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+  where
+    accentColor = xmobarColor "#32827f" ""
 
 ------------------------------------------------------------------
 -- Autostart
@@ -98,14 +96,18 @@ myStartupHook = do
 ------------------------------------------------------------------
 -- Layout
 ------------------------------------------------------------------
-myLayoutHook = smartBorders ((spacingRaw False (Border mySpacing 0 mySpacing 0) True (Border 0 mySpacing 0 mySpacing) True $ Tall 1 (3/100) (1/2)) ||| Full)
+myLayoutHook = smartBorders ((spacingRaw False (Border mySpacing 0 mySpacing 0) True (Border 0 mySpacing 0 mySpacing) True $ tiled) ||| Full)
+  where
+    tiled   = Tall nmaster delta ratio
+    nmaster = 1      -- Default number of windows in the master pane
+    ratio   = 1/2    -- Default proportion of screen occupied by master pane
+    delta   = 3/100  -- Percent of screen to increment by when resizing panes
 
 ------------------------------------------------------------------
 -- Window rules
 ------------------------------------------------------------------
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
-    , className =? "Mendeley Reference Manager" --> doShift "main"
     , className =? "Signal" --> doShift "chat"
     , className =? "TelegramDesktop" --> doShift "chat"
     , className =? "discord" --> doShift "chat"
@@ -161,20 +163,16 @@ myKeys =
     -- Applications
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
     , ("M1-S-<Return>", spawn "thunar")
-    , ("M-M1-f w", spawn "firefox -P 'Work'")
-    , ("M-M1-f p", spawn "firefox -P 'Personal'")
+    , ("M-M1-f", spawn "firefox")
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-t", spawn "telegram-desktop")
     , ("M-M1-d", spawn "discord")
-    , ("M-M1-m", spawn "mendeley-reference-manager")
-    , ("M-M1-c", spawn "firefox -P 'Personal' 'https://calendar.protonmail.com/u/0/'")
-    , ("M-M1-v", spawn "vivaldi-stable")
 
     -- Email
-    , ("M-M1-p 1", spawn "firefox -P 'Personal' 'https://mail.protonmail.com/u/0/inbox'")
-    , ("M-M1-p 2", spawn "firefox -P 'Personal' 'https://mail.protonmail.com/u/1/inbox'")
-    , ("M-M1-g w", spawn "firefox -P 'Work' 'https://mail.google.com/mail/u/0/#inbox'")
-    , ("M-M1-g p", spawn "firefox -P 'Personal' 'https://mail.google.com/mail/u/0/#inbox'")
+    , ("M-M1-p 1", spawn "firefox 'https://mail.protonmail.com/u/0/inbox'")
+    , ("M-M1-p 2", spawn "firefox 'https://mail.protonmail.com/u/1/inbox'")
+    , ("M-M1-g p", spawn "firefox 'https://mail.google.com/mail/u/0/#inbox'")
+    , ("M-M1-g w", spawn "firefox 'https://mail.google.com/mail/u/1/#inbox'")
 
     -- Function keys
     , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2")

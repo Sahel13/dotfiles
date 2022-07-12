@@ -39,7 +39,7 @@ cdl () {
 }
 
 # Self-explanatory
-alias show-disk-space="df -H /dev/sda3 /dev/sda4"
+alias show-disk-space="df -H /dev/sda3"
 alias netcheck="ping -c 3 archlinux.org"
 format-pendrive () {
 	sudo umount $2
@@ -48,11 +48,5 @@ format-pendrive () {
 
 alias night-mode="redshift -P -O 4500"
 
-# Current
-alias lingaraj="ssh sahel@10.10.0.181"
-alias durga="ssh sahel@10.10.0.182"
-alias localpc="ssh sahel@10.0.2.42"
-
-alias gpus="nvidia-smi -lms 5000"
-
+# For installing new packages in latex
 alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
