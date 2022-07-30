@@ -5,12 +5,12 @@ Config {
 	, additionalFonts = ["xft:Font Awesome 6 Free Solid:style=Solid:size=11:bold:antialias=true"]
    , bgColor =      "#1d1d1d"
    , fgColor =      "#afb1af"
-   , position =     Top  -- TopW L 90
+   , position =     TopW L 95
 
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%XMonadLog% }{ %battery% | %multicpu% | %coretemp% | %memory% | %alsa:default:Master% | %date% "
+   , template = "%XMonadLog% }{ %battery% | %multicpu% | %coretemp% | %memory% | %alsa:default:Master% | %date% |"
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start

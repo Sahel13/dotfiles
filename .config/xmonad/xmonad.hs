@@ -90,6 +90,8 @@ myStartupHook = do
     spawnOnce "/usr/bin/dunst &" -- Notification server
     spawnOnce "xfce4-power-manager &" -- Power manager
     spawnOnce "unclutter &" -- Hide the cursor
+    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --transparent true --tint 0x1d1d1d --height 18 &"
+    spawnOnce "nm-applet &"
     setWMName "LG3D"
     setDefaultCursor xC_left_ptr -- Set cursor style
 
@@ -100,17 +102,19 @@ myLayoutHook = smartBorders ((spacingRaw False (Border mySpacing 0 mySpacing 0) 
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
-    ratio   = 1/2    -- Default proportion of screen occupied by master pane
-    delta   = 3/100  -- Percent of screen to increment by when resizing panes
+    delta   = 3/100  -- Percent of the screen to increment by when resizing panes
+    ratio   = 1/2    -- Default proportion of the screen occupied by the master pane
 
 ------------------------------------------------------------------
 -- Window rules
 ------------------------------------------------------------------
 myManageHook = composeAll
-    [ className =? "firefox" --> doShift "web"
+    [ className =? "Zotero" --> doShift "main"
+    , className =? "firefox" --> doShift "web"
     , className =? "Signal" --> doShift "chat"
     , className =? "TelegramDesktop" --> doShift "chat"
     , className =? "discord" --> doShift "chat"
+    , className =? "Anki" --> doShift "misc"
     , className =? "vlc" --> doShift "misc"
     , namedScratchpadManageHook myScratchpads
     ]
@@ -163,14 +167,15 @@ myKeys =
     -- Applications
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
     , ("M1-S-<Return>", spawn "thunar")
+    , ("M-M1-z", spawn "zotero")
     , ("M-M1-f", spawn "firefox")
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-t", spawn "telegram-desktop")
     , ("M-M1-d", spawn "discord")
 
     -- Email
-    , ("M-M1-p 1", spawn "firefox 'https://mail.protonmail.com/u/0/inbox'")
-    , ("M-M1-p 2", spawn "firefox 'https://mail.protonmail.com/u/1/inbox'")
+    , ("M-M1-p 1", spawn "firefox 'https://mail.proton.me/u/0/inbox'")
+    , ("M-M1-p 2", spawn "firefox 'https://mail.proton.me/u/1/inbox'")
     , ("M-M1-g p", spawn "firefox 'https://mail.google.com/mail/u/0/#inbox'")
     , ("M-M1-g w", spawn "firefox 'https://mail.google.com/mail/u/1/#inbox'")
 

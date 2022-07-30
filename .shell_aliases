@@ -19,7 +19,7 @@ alias get-mirrors="sudo reflector --verbose --latest 10 --sort rate --download-t
 # Configuration files
 alias zsh-config="vim ~/.zshrc"
 alias vim-config="vim ~/.vimrc"
-alias xmonad-config="vim ~/.xmonad/xmonad.hs"
+alias xmonad-config="vim ~/.config/xmonad/xmonad.hs"
 
 # Wifi and bluetooth
 alias block-wifi="sudo rfkill block 0"
