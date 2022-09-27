@@ -23,5 +23,6 @@
     <property name="dpms-on-ac-sleep" type="uint" value="0"/>
     <property name="brightness-on-ac" type="uint" value="9"/>
     <property name="brightness-level-on-ac" type="uint" value="20"/>
+    <property name="show-tray-icon" type="bool" value="false"/>
   </property>
 </channel>

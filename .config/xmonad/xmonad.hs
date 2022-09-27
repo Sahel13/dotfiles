@@ -169,6 +169,7 @@ myKeys =
     , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-z", spawn "zotero")
     , ("M-M1-f", spawn "firefox")
+    , ("M-M1-v", spawn "vivaldi-stable")
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-t", spawn "telegram-desktop")
     , ("M-M1-d", spawn "discord")

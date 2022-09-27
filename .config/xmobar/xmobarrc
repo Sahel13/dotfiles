@@ -1,75 +1,68 @@
-Config { 
+Config { font            = "xft:Ubuntu Mono:size=11:bold:antialias=true"
+	     , additionalFonts = ["xft:Font Awesome 6 Free Solid:style=Solid:size=11:bold:antialias=true"]
+       , bgColor         = "#1d1d1d"
+       , fgColor         = "#afb1af"
+       , position        = TopW L 95
 
-   -- appearance
-     font =         "xft:Ubuntu Mono:size=11:bold:antialias=true"
-	, additionalFonts = ["xft:Font Awesome 6 Free Solid:style=Solid:size=11:bold:antialias=true"]
-   , bgColor =      "#1d1d1d"
-   , fgColor =      "#afb1af"
-   , position =     TopW L 95
+       , commands = [ Run XMonadLog
 
-   -- layout
-   , sepChar =  "%"   -- delineator between plugin names and straight text
-   , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%XMonadLog% }{ %battery% | %multicpu% | %coretemp% | %memory% | %alsa:default:Master% | %date% |"
+       -- cpu activity monitor
+       , Run MultiCpu       [ "--template" , "<fn=1>\xf2db</fn> <total0>%"
+                            , "--Low"      , "50"         -- units: %
+                            , "--High"     , "85"         -- units: %
+                            , "--high"     , "darkred"
+                            ] 10
 
-   -- general behavior
-   , lowerOnStart =     True    -- send to bottom of window stack on start
-   , hideOnStart =      False   -- start with window unmapped (hidden)
-   , allDesktops =      True    -- show on all desktops
-   , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
-   , pickBroadest =     False   -- choose widest display (multi-monitor)
-   , persistent =       True    -- enable/disable hiding (True = disabled)
+       -- memory usage monitor
+       , Run Memory         [ "--template" ,"<fn=1>\xf538</fn> <usedratio>%"
+                            , "--Low"      , "20"        -- units: %
+                            , "--High"     , "90"        -- units: %
+                            , "--high"     , "darkred"
+                            ] 10
 
-   -- plugins
-   , commands = 
-	[ Run XMonadLog
+       -- cpu core temperature monitor
+       , Run CoreTemp ["-t", "<fn=1>\xf2c8</fn> <core0> C",
+                      "-L", "50", "-H", "80",
+                      "-l", "lightblue", "-h", "red"] 50
+              
+       -- sound
+       , Run Alsa "default" "Master"
+                               [ "--template", "<fn=1>\xf027</fn> <volumestatus>"
+                               , "--suffix"  , "True"
+                               , "--"
+                               , "--on", ""
+                               ]
 
-        -- cpu activity monitor
-        , Run MultiCpu       [ "--template" , "<fn=1></fn> <total0>%"
-                             , "--Low"      , "50"         -- units: %
-                             , "--High"     , "85"         -- units: %
-                             , "--high"     , "darkred"
-                             ] 10
+       -- battery monitor
+       , Run Battery        [ "--template" , "<fn=1>\xf241</fn> <acstatus>"
+                            , "--Low"      , "30"        -- units: %
+                            , "--High"     , "80"        -- units: %
+                            , "--low"      , "darkred"
 
-        -- cpu core temperature monitor
-        , Run CoreTemp       [ "--template" , "<fn=1></fn> <core0>°C"
-                             , "--Low"      , "70"        -- units: °C
-                             , "--High"     , "80"        -- units: °C
-                             , "--high"     , "darkred"
-                             ] 50
-                          
-        -- memory usage monitor
-        , Run Memory         [ "--template" ,"<fn=1></fn> <usedratio>%"
-                             , "--Low"      , "20"        -- units: %
-                             , "--High"     , "90"        -- units: %
-                             , "--high"     , "darkred"
-                             ] 10
+                            , "--" -- battery specific options
+                                      -- discharging status
+                                      , "-o"	, "<left>%"
+                                      -- AC "on" status
+                                      , "-O"	, "<fc=#dAA520>Charging</fc>"
+                                      -- charged status
+                                      , "-i"	, "<fc=#006000>Charged</fc>"
+                            ] 50
 
-      -- sound
-      , Run Alsa "default" "Master"
-                              [ "--template", "<fn=1></fn> <volumestatus>"
-                              , "--suffix"  , "True"
-                              , "--"
-                              , "--on", ""
-                              ]
+       -- time and date indicator
+       , Run Date "<fn=1>\xf073</fn> %A, %d %B | <fn=1>\xf017</fn> %H:%M" "date" 10
+       ]
 
-        -- battery monitor
-        , Run Battery        [ "--template" , "<fn=1></fn> <acstatus>"
-                             , "--Low"      , "30"        -- units: %
-                             , "--High"     , "80"        -- units: %
-                             , "--low"      , "darkred"
+       -- layout
+       , sepChar =  "%"   -- delineator between plugin names and straight text
+       , alignSep = "}{"  -- separator between left-right alignment
+       , template = "%XMonadLog% }{ %battery% | %multicpu% | %coretemp% | %memory% | %alsa:default:Master% | %date% |"
 
-                             , "--" -- battery specific options
-                                       -- discharging status
-                                       , "-o"	, "<left>%"
-                                       -- AC "on" status
-                                       , "-O"	, "<fc=#dAA520>Charging</fc>"
-                                       -- charged status
-                                       , "-i"	, "<fc=#006000>Charged</fc>"
-                             ] 50
+       -- general behavior
+       , lowerOnStart =     True    -- send to bottom of window stack on start
+       , hideOnStart =      False   -- start with window unmapped (hidden)
+       , allDesktops =      True    -- show on all desktops
+       , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
+       , pickBroadest =     False   -- choose widest display (multi-monitor)
+       , persistent =       True    -- enable/disable hiding (True = disabled)
 
-        -- time and date indicator 
-        --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
-        , Run Date           "%A, %d %B | %H:%M" "date" 10
-        ]
-   }
+       }

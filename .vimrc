@@ -53,8 +53,10 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 nnoremap <silent> <C-_> :FuzzyOpen<CR>
 
 " --- vimwiki ---
-let g:vimwiki_list = [{'path': '~/vimwiki/',
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext = 0
+let g:vimwiki_markdown_link_ext = 1
 
 " ---------------
 " Other settings.
