@@ -53,14 +53,14 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
 # Decrease backlight on startup
-xbacklight -set 10
+xbacklight -set 70
 
 # If external display is connected, turn off laptop display
-/usr/bin/xrandr --current | grep "DP1 connected 1"
-if [ $? -eq 0 ]; then
-	/usr/bin/xrandr --output "eDP1" --off
-	/usr/bin/xrandr --output "DP1" --auto --primary
-fi
+# /usr/bin/xrandr --current | grep "DP1 connected 1"
+# if [ $? -eq 0 ]; then
+# 	/usr/bin/xrandr --output "eDP1" --off
+# 	/usr/bin/xrandr --output "DP1" --auto --primary
+# fi
 
 # Start xmonad
 exec xmonad

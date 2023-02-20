@@ -168,15 +168,15 @@ myKeys =
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
     , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-z", spawn "zotero")
-    , ("M-M1-f", spawn "firefox")
+    , ("M-M1-f w", spawn "firefox -P Work")
+    , ("M-M1-f p", spawn "firefox -P Personal")
     , ("M-M1-v", spawn "vivaldi-stable")
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-t", spawn "telegram-desktop")
     , ("M-M1-d", spawn "discord")
 
     -- Email
-    , ("M-M1-p 1", spawn "firefox 'https://mail.proton.me/u/0/inbox'")
-    , ("M-M1-p 2", spawn "firefox 'https://mail.proton.me/u/1/inbox'")
+    , ("M-M1-p", spawn "firefox 'https://mail.proton.me/u/0/inbox'")
     , ("M-M1-g p", spawn "firefox 'https://mail.google.com/mail/u/0/#inbox'")
     , ("M-M1-g w", spawn "firefox 'https://mail.google.com/mail/u/1/#inbox'")
 
