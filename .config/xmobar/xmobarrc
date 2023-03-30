@@ -1,5 +1,5 @@
-Config { font            = "xft:Ubuntu Mono:size=11:bold:antialias=true"
-	     , additionalFonts = ["xft:Font Awesome 6 Free Solid:style=Solid:size=11:bold:antialias=true"]
+Config { font            = "Ubuntu Mono 12"
+	     , additionalFonts = ["Font Awesome 6 Free Solid 12"]
        , bgColor         = "#1d1d1d"
        , fgColor         = "#afb1af"
        , position        = TopW L 95
