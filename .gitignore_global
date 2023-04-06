@@ -1,0 +1,2 @@
+# Ignore the build directory for LaTeX files
+build_dir/

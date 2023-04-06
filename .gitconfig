@@ -3,6 +3,7 @@
   email = sahel13miqbal@protonmail.ch
 [core]
   editor = nvim
+	excludesfile = /home/sahel/.gitignore_global
 [init]
   defaultBranch = main
 [pull]
