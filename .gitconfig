@@ -1,6 +1,6 @@
 [user]
   name = Sahel Mohammad Iqbal
-  email = sahel13miqbal@protonmail.ch
+  email = sahel13miqbal@proton.me
 [core]
   editor = nvim
 	excludesfile = /home/sahel/.gitignore_global
@@ -10,3 +10,5 @@
   rebase = false
 [credential]
   helper = /usr/lib/git-core/git-credential-libsecret
+[github]
+	user = Sahel13

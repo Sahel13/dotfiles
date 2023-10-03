@@ -8,6 +8,7 @@ set encoding=utf-8
 call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox' " Gruvbox theme
+Plug 'sainnhe/everforest' " Everforest theme
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'lervag/vimtex' " Latex support
 Plug 'SirVer/ultisnips' " Snippets
@@ -20,11 +21,19 @@ call plug#end()
 " Plugin configuration.
 " ---------------------
 
+set termguicolors
+
 " --- gruvbox ---
 set background=dark
 let g:gruvbox_contrast_dark = 'medium'
 colorscheme gruvbox
-set termguicolors
+
+" --- everforest ---
+" set background=dark
+" let g:everforest_background = 'hard'
+" let g:everforest_better_performance = 1
+" colorscheme everforest
+
 
 " --- vim-airline ---
 let g:airline_powerline_fonts = 1
@@ -37,6 +46,7 @@ let g:vimtex_quickfix_mode = 0
 let g:vimtex_compiler_latexmk = {
   \ 'build_dir' : 'build_dir',
   \}
+let g:vimtex_indent_enabled   = 0
 
 " For the metropolis beamer theme.
 " let g:vimtex_compiler_latexmk_engines = {

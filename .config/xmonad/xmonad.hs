@@ -9,6 +9,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.ManageHelpers
 
 -- Layouts
 import XMonad.Layout.Spacing
@@ -116,6 +117,8 @@ myManageHook = composeAll
     , className =? "discord" --> doShift "chat"
     , className =? "Anki" --> doShift "misc"
     , className =? "vlc" --> doShift "misc"
+    , className =? "zoom" --> doFloat
+    , isDialog --> doFloat
     , namedScratchpadManageHook myScratchpads
     ]
 
@@ -149,6 +152,7 @@ myKeys =
     [ ("M-S-r", spawn "xmonad --recompile && xmonad --restart")
     , ("M-S-q", io exitSuccess)
     , ("M-q", kill)
+    , ("M-S-x", spawn "slock")
     , ("M-<Return>", spawn myTerminal)
 
     -- Utilities
