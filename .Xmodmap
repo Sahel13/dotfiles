@@ -2,12 +2,12 @@
 !
 ! Swap Caps_Lock and Control_L
 !
-clear lock
-remove control = Control_L
-keysym Caps_Lock = Control_L
-keysym Control_L = Caps_Lock
-add lock = Caps_Lock
-add control = Control_L
+! clear lock
+! remove control = Control_L
+! keysym Caps_Lock = Control_L
+! keysym Control_L = Caps_Lock
+! add lock = Caps_Lock
+! add control = Control_L
 !
 ! Swap Alt and Win (for PC keyboard)
 !

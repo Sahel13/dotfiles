@@ -3,12 +3,10 @@
   email = sahel13miqbal@proton.me
 [core]
   editor = nvim
-	excludesfile = /home/sahel/.gitignore_global
+  excludesfile = /home/sahel/.gitignore_global
 [init]
   defaultBranch = main
 [pull]
   rebase = false
-[credential]
-  helper = /usr/lib/git-core/git-credential-libsecret
 [github]
-	user = Sahel13
+  user = Sahel13
