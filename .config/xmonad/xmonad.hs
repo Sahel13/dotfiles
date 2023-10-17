@@ -87,11 +87,9 @@ myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "~/.fehbg &" -- Wallpaper
     spawnOnce "picom -b &" -- Compositor
-    spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &" -- Authentication agent
     spawnOnce "/usr/bin/dunst &" -- Notification server
-    spawnOnce "xfce4-power-manager &" -- Power manager
     spawnOnce "unclutter &" -- Hide the cursor
-    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --transparent true --tint 0x1d1d1d --height 18 &"
+    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --transparent true --alpha 5 --tint 0x000000 --height 30 &"
     spawnOnce "nm-applet &"
     setWMName "LG3D"
     setDefaultCursor xC_left_ptr -- Set cursor style
@@ -99,7 +97,7 @@ myStartupHook = do
 ------------------------------------------------------------------
 -- Layout
 ------------------------------------------------------------------
-myLayoutHook = smartBorders ((spacingRaw False (Border mySpacing 0 mySpacing 0) True (Border 0 mySpacing 0 mySpacing) True $ tiled) ||| Full)
+myLayoutHook = smartBorders ((spacingRaw True (Border mySpacing 0 mySpacing 0) True (Border 0 mySpacing 0 mySpacing) True $ tiled) ||| Full)
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
@@ -172,8 +170,8 @@ myKeys =
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
     , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-z", spawn "zotero")
-    , ("M-M1-f w", spawn "firefox -P Work")
-    , ("M-M1-f p", spawn "firefox -P Personal")
+    , ("M-M1-f", spawn "firefox")
+    -- , ("M-M1-f p", spawn "firefox -P Personal")
     , ("M-M1-v", spawn "vivaldi-stable")
     , ("M-M1-s", spawn "signal-desktop")
     , ("M-M1-t", spawn "telegram-desktop")
@@ -185,8 +183,8 @@ myKeys =
     , ("M-M1-g w", spawn "firefox 'https://mail.google.com/mail/u/1/#inbox'")
 
     -- Function keys
-    , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2")
-    , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2")
+    , ("<XF86MonBrightnessUp>", spawn "/home/sahel/scripts/backlight.sh +")
+    , ("<XF86MonBrightnessDown>", spawn "/home/sahel/scripts/backlight.sh -")
     , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+")
     , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%-")
     , ("<XF86AudioMute>", spawn "amixer set Master toggle")

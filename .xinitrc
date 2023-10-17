@@ -1,7 +1,7 @@
 #!/bin/sh
 
 userresources=$HOME/.Xresources
-usermodmap=$HOME/.Xmodmap
+# usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
@@ -35,9 +35,9 @@ if [ -f "$userresources" ]; then
 
 fi
 
-if [ -f "$usermodmap" ]; then
-    xmodmap "$usermodmap"
-fi
+# if [ -f "$usermodmap" ]; then
+#     xmodmap "$usermodmap"
+# fi
 
 # start some nice programs
 
@@ -52,15 +52,15 @@ fi
 # eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 # export SSH_AUTH_SOCK
 
-# Decrease backlight on startup
-# xbacklight -set 70
-
 # If external display is connected, turn off laptop display
 # /usr/bin/xrandr --current | grep "DP1 connected 1"
 # if [ $? -eq 0 ]; then
 # 	/usr/bin/xrandr --output "eDP1" --off
 # 	/usr/bin/xrandr --output "DP1" --auto --primary
 # fi
+
+# Load Xkeymap
+test -f ~/.Xkeymap && xkbcomp ~/.Xkeymap $DISPLAY
 
 # Start xmonad
 exec xmonad
