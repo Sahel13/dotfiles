@@ -1,5 +1,5 @@
-Config { font            = "Ubuntu Mono 16"
-	     , additionalFonts = ["Font Awesome 6 Free Solid 15"]
+Config { font            = "Mononoki Nerd Font Mono 14"
+	     , additionalFonts = ["Font Awesome 6 Free Solid 14"]
        , bgColor         = "#1d1d1d"
        , fgColor         = "#afb1af"
        -- , position        = TopW L 95

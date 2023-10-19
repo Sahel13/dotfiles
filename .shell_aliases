@@ -16,12 +16,6 @@ alias list-orphans="sudo pacman -Qtdq"
 alias cleanup-orphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias get-mirrors="sudo reflector --verbose --latest 10 --sort rate --download-timeout 60 --save /etc/pacman.d/mirrorlist"
 
-# Configuration files
-alias zsh-config="vim ~/.zshrc"
-alias vim-config="vim ~/.vimrc"
-alias xmonad-config="vim ~/.config/xmonad/xmonad.hs"
-alias alacritty-config="vim ~/.config/alacritty/alacritty.yml"
-
 # Wifi and bluetooth
 alias block-wifi="sudo rfkill block 0"
 alias unblock-wifi="sudo rfkill unblock 0"
@@ -33,21 +27,17 @@ alias reconnect="sudo systemctl restart NetworkManager.service"
 alias la="ls --color=auto -ogA"
 alias ..="cd ../"
 alias ...="cd ../../"
-alias rm="rm -rf"
+alias rm="rm -r"
 cdl () {
 	cd $1
 	la
 }
 
 # Self-explanatory
-alias show-disk-space="df -H /dev/mapper/cryptroot"
-alias netcheck="ping -c 3 archlinux.org"
+alias show-disk-space="df -H /dev/nvme0n1p3"
 format-pendrive () {
 	sudo umount $2
 	sudo mkfs.vfat -n $1 -I $2
 }
 
 alias night-mode="redshift -P -O 4500"
-
-# For installing new packages in latex
-alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
