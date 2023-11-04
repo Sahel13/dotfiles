@@ -13,8 +13,6 @@ import XMonad.Hooks.ManageHelpers
 -- Layouts
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders (smartBorders)
-import XMonad.Layout.ThreeColumns
-import XMonad.Layout.Magnifier
 
 -- Utilities
 import XMonad.Util.SpawnOnce
@@ -84,10 +82,9 @@ myXmobarPP = def
 -- Layout
 ------------------------------------------------------------------
 -- myLayoutHook = smartBorders ((spacingRaw True (Border mySpacing 0 mySpacing 0) True (Border 0 mySpacing 0 mySpacing) True $ tiled) ||| Full)
-myLayoutHook = smartBorders (tiled ||| threecol ||| Full)
+myLayoutHook = smartBorders (tiled ||| Full)
   where
     tiled   = Tall nmaster delta ratio
-    threecol = magnifiercz' 1.3 $ ThreeColMid nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
     delta   = 3/100  -- Percent of the screen to increment by when resizing panes
     ratio   = 1/2    -- Default proportion of the screen occupied by the master pane
@@ -100,8 +97,8 @@ myManageHook = composeAll
     , className =? "firefox" --> doShift "web"
     , className =? "Signal" --> doShift "chat"
     , className =? "vlc" --> doShift "misc"
-    , className =? "zoom" --> doFloat
     , className =? "zoom" --> doShift "main"
+    , className =? "zoom" --> doFloat
     , isDialog --> doFloat
     , namedScratchpadManageHook myScratchpads
     ]

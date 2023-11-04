@@ -1,0 +1,8 @@
+{
+  "gruvbox-material": { "branch": "master", "commit": "d13f4d4e75510e3d798f2ff7561d3c8991220375" },
+  "lazy.nvim": { "branch": "main", "commit": "16603c6917435d8446f7357cb61095138a417085" },
+  "neovim-fuzzy": { "branch": "master", "commit": "f6a1429bd0ac9953eb1d838ba800e69685fbcac1" },
+  "ultisnips": { "branch": "master", "commit": "b393ba65386d47664421e1f8b246a87a6e8b218c" },
+  "vimtex": { "branch": "master", "commit": "2ee33217ba76cb875429ceabd2d99c2f59fdfe11" },
+  "vimwiki": { "branch": "dev", "commit": "0bb1b4945bb205a076a35b66174e5d66be8eaafe" }
+}

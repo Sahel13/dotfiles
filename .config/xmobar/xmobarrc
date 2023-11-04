@@ -2,8 +2,7 @@ Config { font            = "Mononoki Nerd Font Mono 14"
 	     , additionalFonts = ["Font Awesome 6 Free Solid 14"]
        , bgColor         = "#1d1d1d"
        , fgColor         = "#afb1af"
-       -- , position        = BottomW L 95
-       , position = Static { xpos = 0 , ypos = 1170, width = 1824, height = 30 }
+       , position        = BottomSize L 95 30
 
        , commands = [ Run XMonadLog
 
