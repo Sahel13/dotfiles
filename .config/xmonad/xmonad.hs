@@ -5,6 +5,7 @@ import XMonad
 import System.Exit (exitSuccess)
 
 -- Hooks
+import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
@@ -62,6 +63,7 @@ myConfig = def
     , focusedBorderColor = "#076678"
     , workspaces = myWorkspaces
     -- Hooks
+    , startupHook = myStartupHook
     , layoutHook = myLayoutHook
     , manageHook = myManageHook
     } `additionalKeysP` myKeys
@@ -79,9 +81,15 @@ myXmobarPP = def
     accentColor = xmobarColor "#32827f" ""
 
 ------------------------------------------------------------------
+-- StartupHook
+------------------------------------------------------------------
+myStartupHook :: X ()
+myStartupHook = do
+    setWMName "LG3D" -- Needed for PyCharm
+
+------------------------------------------------------------------
 -- Layout
 ------------------------------------------------------------------
--- myLayoutHook = smartBorders ((spacingRaw True (Border mySpacing 0 mySpacing 0) True (Border 0 mySpacing 0 mySpacing) True $ tiled) ||| Full)
 myLayoutHook = smartBorders (tiled ||| Full)
   where
     tiled   = Tall nmaster delta ratio

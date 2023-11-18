@@ -52,4 +52,17 @@ return {
     "cloudhead/neovim-fuzzy",
     keys = {{ "<C-_>", "<cmd>:FuzzyOpen<cr>", silent = true}},
   },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function ()
+      local configs = require("nvim-treesitter.configs")
+
+      configs.setup({
+          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "haskell", "python", "julia" },
+          sync_install = false,
+          highlight = { enable = true },
+        })
+    end
+  },
 }

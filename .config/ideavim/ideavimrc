@@ -42,3 +42,6 @@ map <leader>b <Action>(ToggleLineBreakpoint)
 map <leader>o <Action>(FileStructurePopup)
 
 inoremap jk <ESC>
+nnoremap ; :
+
+set clipboard=unnamedplus

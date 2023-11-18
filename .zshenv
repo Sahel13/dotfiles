@@ -1,5 +1,10 @@
 typeset -U path PATH
-path=(~/.local/bin ~/Misc/texlive/bin/x86_64-linux $path)
+path=(
+  ~/.local/bin
+  ~/Misc/texlive/bin/x86_64-linux
+  ~/.local/share/gem/ruby/3.0.0/bin
+  $path
+)
 export PATH
 
 # For consistent font sizes in alacritty across terminals. From:
@@ -7,4 +12,7 @@ export PATH
 # https://github.com/alacritty/alacritty/issues/5101
 export WINIT_X11_SCALE_FACTOR=1
 
-export ZDOTDIR="/home/sahel/.config/zsh"
+# Install Ruby Gems to ~/Misc/gems
+export GEM_HOME="$HOME/Misc/gems"
+
+export ZDOTDIR="$HOME/.config/zsh"

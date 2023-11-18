@@ -8,10 +8,6 @@ alias aliases="vim ~/.shell_aliases"
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # Package management (pacman)
-alias pacman-install="sudo pacman -S --needed"
-alias pacman-info="sudo pacman -Qi"
-alias pacman-uninstall="sudo pacman -Rns"
-alias pacman-update="sudo pacman -Syu"
 alias list-orphans="sudo pacman -Qtdq"
 alias cleanup-orphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias get-mirrors="sudo reflector --verbose --latest 10 --sort rate --download-timeout 60 --save /etc/pacman.d/mirrorlist"
@@ -40,4 +36,5 @@ format-pendrive () {
 	sudo mkfs.vfat -n $1 -I $2
 }
 
-alias night-mode="redshift -P -O 4500"
+# Command to backup my `Documents` directory.
+alias backup="rclone sync --interactive /home/sahel/Documents Dropbox:Thinkpad_Backup --exclude 'out_dir/**' --exclude 'aux_dir/**'"

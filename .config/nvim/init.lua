@@ -21,11 +21,14 @@ vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 vim.o.smarttab = true
 vim.o.expandtab = true
+vim.o.smarttab = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
 -- Keymaps
 vim.g.mapleader = " "
 vim.keymap.set({ "n" }, ";", ":")
-vim.keymap.set({ "i", "v" }, "jk", "<ESC>")
+vim.keymap.set({ "i" }, "jk", "<ESC>")
 
 -- Split navigation
 vim.o.splitbelow = true
