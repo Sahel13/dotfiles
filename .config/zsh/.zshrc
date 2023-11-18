@@ -1,12 +1,12 @@
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE=$ZDOTDIR/.histfile
 HISTSIZE=500
 SAVEHIST=2000
 setopt autocd beep extendedglob nomatch
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/sahel/.zshrc'
+zstyle :compinstall filename '$ZDOTDIR/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -23,5 +23,5 @@ fi
 # Vi mode
 bindkey -v
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/extensions/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZDOTDIR/extensions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

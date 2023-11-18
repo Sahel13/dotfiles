@@ -81,25 +81,16 @@ myXmobarPP = def
     accentColor = xmobarColor "#32827f" ""
 
 ------------------------------------------------------------------
--- Autostart
+-- StartupHook
 ------------------------------------------------------------------
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "~/.fehbg &" -- Wallpaper
-    spawnOnce "picom -b &" -- Compositor
-    spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &" -- Authentication agent
-    spawnOnce "/usr/bin/dunst &" -- Notification server
-    spawnOnce "xfce4-power-manager &" -- Power manager
-    spawnOnce "unclutter &" -- Hide the cursor
-    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --transparent true --tint 0x1d1d1d --height 18 &"
-    spawnOnce "nm-applet &"
-    setWMName "LG3D"
-    setDefaultCursor xC_left_ptr -- Set cursor style
+    setWMName "LG3D" -- Needed for PyCharm
 
 ------------------------------------------------------------------
 -- Layout
 ------------------------------------------------------------------
-myLayoutHook = smartBorders ((spacingRaw False (Border mySpacing 0 mySpacing 0) True (Border 0 mySpacing 0 mySpacing) True $ tiled) ||| Full)
+myLayoutHook = smartBorders (tiled ||| Full)
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
@@ -113,10 +104,8 @@ myManageHook = composeAll
     [ className =? "Zotero" --> doShift "main"
     , className =? "firefox" --> doShift "web"
     , className =? "Signal" --> doShift "chat"
-    , className =? "TelegramDesktop" --> doShift "chat"
-    , className =? "discord" --> doShift "chat"
-    , className =? "Anki" --> doShift "misc"
     , className =? "vlc" --> doShift "misc"
+    , className =? "zoom" --> doShift "main"
     , className =? "zoom" --> doFloat
     , isDialog --> doFloat
     , namedScratchpadManageHook myScratchpads
@@ -152,7 +141,7 @@ myKeys =
     [ ("M-S-r", spawn "xmonad --recompile && xmonad --restart")
     , ("M-S-q", io exitSuccess)
     , ("M-q", kill)
-    , ("M-S-x", spawn "slock")
+    , ("M-S-x", spawn "/home/sahel/.local/scripts/screen_lock.sh")
     , ("M-<Return>", spawn myTerminal)
 
     -- Utilities
@@ -172,21 +161,16 @@ myKeys =
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
     , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-z", spawn "zotero")
-    , ("M-M1-f w", spawn "firefox -P Work")
-    , ("M-M1-f p", spawn "firefox -P Personal")
-    , ("M-M1-v", spawn "vivaldi-stable")
+    , ("M-M1-f", spawn "firefox")
+    -- , ("M-M1-f p", spawn "firefox -P Personal")
     , ("M-M1-s", spawn "signal-desktop")
-    , ("M-M1-t", spawn "telegram-desktop")
-    , ("M-M1-d", spawn "discord")
 
     -- Email
     , ("M-M1-p", spawn "firefox 'https://mail.proton.me/u/0/inbox'")
-    , ("M-M1-g p", spawn "firefox 'https://mail.google.com/mail/u/0/#inbox'")
-    , ("M-M1-g w", spawn "firefox 'https://mail.google.com/mail/u/1/#inbox'")
 
     -- Function keys
-    , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2")
-    , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2")
+    , ("<XF86MonBrightnessUp>", spawn "/home/sahel/.local/scripts/backlight.sh +")
+    , ("<XF86MonBrightnessDown>", spawn "/home/sahel/.local/scripts/backlight.sh -")
     , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+")
     , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%-")
     , ("<XF86AudioMute>", spawn "amixer set Master toggle")

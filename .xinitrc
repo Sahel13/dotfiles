@@ -8,15 +8,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
-
-
-
-
-
-
-
     xrdb -merge $sysresources
-
 fi
 
 if [ -f $sysmodmap ]; then
@@ -24,15 +16,7 @@ if [ -f $sysmodmap ]; then
 fi
 
 if [ -f "$userresources" ]; then
-
-
-
-
-
-
-
     xrdb -merge "$userresources"
-
 fi
 
 if [ -f "$usermodmap" ]; then
@@ -48,19 +32,26 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-# For gnome-keyring-daemon
-# eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-# export SSH_AUTH_SOCK
+# Compositor
+picom -b &
 
-# Decrease backlight on startup
-# xbacklight -set 70
+# Notification server
+/usr/bin/dunst &
 
-# If external display is connected, turn off laptop display
-# /usr/bin/xrandr --current | grep "DP1 connected 1"
-# if [ $? -eq 0 ]; then
-# 	/usr/bin/xrandr --output "eDP1" --off
-# 	/usr/bin/xrandr --output "DP1" --auto --primary
-# fi
+# Hide the cursor after a period of inactivity.
+unclutter -noevents &
+
+# Set the default X cursor to the usual pointer.
+xsetroot -cursor_name left_ptr
+
+# Set the wallpaper.
+feh --no-fehbg --bg-fill ~/Downloads/astronaut.jpg
+
+# Trayer
+trayer --edge bottom --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --transparent true --alpha 5 --tint 0x000000 --height 30 &
+
+# Network manager applet
+nm-applet &
 
 # Start xmonad
 exec xmonad

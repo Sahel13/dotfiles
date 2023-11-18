@@ -1,8 +1,8 @@
-Config { font            = "Ubuntu Mono 12"
-	     , additionalFonts = ["Font Awesome 6 Free Solid 12"]
+Config { font            = "Mononoki Nerd Font Mono 14"
+	     , additionalFonts = ["Font Awesome 6 Free Solid 14"]
        , bgColor         = "#1d1d1d"
        , fgColor         = "#afb1af"
-       , position        = TopW L 95
+       , position        = BottomSize L 95 30
 
        , commands = [ Run XMonadLog
 
@@ -21,9 +21,9 @@ Config { font            = "Ubuntu Mono 12"
                             ] 10
 
        -- cpu core temperature monitor
-       , Run CoreTemp ["-t", "<fn=1>\xf2c8</fn> <core0> C",
-                      "-L", "50", "-H", "80",
-                      "-l", "lightblue", "-h", "red"] 50
+       -- , Run CoreTemp ["-t", "<fn=1>\xf2c8</fn> <core0> C",
+       --                "-L", "50", "-H", "80",
+       --                "-l", "lightblue", "-h", "red"] 50
               
        -- sound
        , Run Alsa "default" "Master"
@@ -55,7 +55,7 @@ Config { font            = "Ubuntu Mono 12"
        -- layout
        , sepChar =  "%"   -- delineator between plugin names and straight text
        , alignSep = "}{"  -- separator between left-right alignment
-       , template = "%XMonadLog% }{ %battery% | %multicpu% | %coretemp% | %memory% | %alsa:default:Master% | %date% |"
+       , template = "%XMonadLog% }{ %battery% | %multicpu% | %memory% | %alsa:default:Master% | %date% |"
 
        -- general behavior
        , lowerOnStart =     True    -- send to bottom of window stack on start
