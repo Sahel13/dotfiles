@@ -30,7 +30,7 @@ cdl () {
 }
 
 # Self-explanatory
-alias show-disk-space="df -H /dev/nvme0n1p3"
+alias show-disk-space="df -h /dev/nvme0n1p3"
 format-pendrive () {
 	sudo umount $2
 	sudo mkfs.vfat -n $1 -I $2

@@ -6,7 +6,7 @@ snippet template "A standard template for latex files."
 \usepackage{amsmath}
 \usepackage{amssymb}
 
-\setlength{\parindent}{2em} % Paragraph indentation
+\setlength{\parindent}{0em} % Paragraph indentation
 \setlength{\parskip}{1em} % Gap between paragraphs
 \renewcommand{\baselinestretch}{1.1} % Line height
 
@@ -27,7 +27,7 @@ snippet template "A standard template for latex files."
 \crefname{equation}{Eq.}{Eqs.}
 
 % Use biblatex for reference management
-\usepackage[backend=biber, style=authoryear, maxcitenames=1, sorting=nty]{biblatex}
+\usepackage[backend=biber, style=authoryear, maxcitenames=2, sorting=nty]{biblatex}
 \addbibresource{references.bib}
 
 \title{}
@@ -62,13 +62,13 @@ snippet ssub "New subsubsection" b
 \subsubsection{$1}
 endsnippet
 
-snippet eq "Equation" bA
+snippet equ "Equation" bA
 \begin{equation}
 	$1
 \end{equation}
 endsnippet
 
-snippet align
+snippet ali "Align"
 \begin{align}
 	$1
 \end{align}
@@ -181,11 +181,11 @@ snippet columns
 \end{columns}
 endsnippet
 
-snippet tbf "Bold font"
+snippet tbf "Bold font" iA
 \textbf{$1}
 endsnippet
 
-snippet bf "Math bold font" i
+snippet bmf "Math bold font" iA
 \mathbf{$1}
 endsnippet
 
@@ -251,14 +251,26 @@ snippet gau "Gaussian"
 \mathcal{N}($1, $2)
 endsnippet
 
-snippet ( "Brackets" iA
-($1)
-endsnippet
-
-snippet { "Curly brackets" iA
-{$1}
-endsnippet
-
 snippet til "Tilde" i
 \tilde{$1}
+endsnippet
+
+snippet cit "Cite"
+\cite{$1}
+endsnippet
+
+snippet pci "Cite in parenthesis"
+\parencite{$1}
+endsnippet
+
+snippet tci[ "Cite in text with options"
+\parencite[$1][$2]{$3}
+endsnippet
+
+snippet tci "Cite in text"
+\textcite{$1}
+endsnippet
+
+snippet tci[ "Cite in text with options"
+\textcite[$1][$2]{$3}
 endsnippet

@@ -12,23 +12,20 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.ManageHelpers
 
 -- Layouts
-import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders (smartBorders)
-
--- Utilities
-import XMonad.Util.SpawnOnce
-import XMonad.Util.Cursor
+import XMonad.Layout.TwoPane
+import XMonad.Layout.Magnifier
 
 -- Keybindings
 import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Actions.Submap
+-- import XMonad.Actions.Submap
 
 -- Scratchpads
 import XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
 
 -- Multi-monitor support
-import XMonad.Actions.CycleWS (nextScreen, prevScreen)
+import XMonad.Actions.CycleWS (toggleWS', nextScreen, prevScreen)
 
 ------------------------------------------------------------------
 -- Variables
@@ -38,9 +35,6 @@ myWorkspaces = ["main", "work", "web", "code", "chat", "misc"]
 
 myTerminal :: String
 myTerminal = "alacritty"
-
-mySpacing :: Integer
-mySpacing = 5
 
 ------------------------------------------------------------------
 -- Main
@@ -90,9 +84,10 @@ myStartupHook = do
 ------------------------------------------------------------------
 -- Layout
 ------------------------------------------------------------------
-myLayoutHook = smartBorders (tiled ||| Full)
+myLayoutHook = smartBorders (tiled ||| Full ||| twopane)
   where
-    tiled   = Tall nmaster delta ratio
+    tiled   = magnifierczOff' 1.3 (Tall nmaster delta ratio)
+    twopane = TwoPane delta ratio
     nmaster = 1      -- Default number of windows in the master pane
     delta   = 3/100  -- Percent of the screen to increment by when resizing panes
     ratio   = 1/2    -- Default proportion of the screen occupied by the master pane
@@ -141,13 +136,13 @@ myKeys =
     [ ("M-S-r", spawn "xmonad --recompile && xmonad --restart")
     , ("M-S-q", io exitSuccess)
     , ("M-q", kill)
-    , ("M-S-x", spawn "/home/sahel/.local/scripts/screen_lock.sh")
     , ("M-<Return>", spawn myTerminal)
 
     -- Utilities
     , ("M-d", spawn "dmenu_run")
     , ("M-s", spawn "flameshot gui")
-    , ("M-S-b", spawn "blueman-manager")
+    , ("M-S-x", spawn "/home/sahel/.local/scripts/screen_lock.sh")
+
         -- Scratchpads
     , ("M-C-<Return>", namedScratchpadAction myScratchpads "terminal")
     , ("M-S-n", namedScratchpadAction myScratchpads "network")
@@ -157,16 +152,17 @@ myKeys =
     , ("M-.", nextScreen)
     , ("M-,", prevScreen)
 
+    -- Toggle between current and previous workspaces.
+    , ("M-<Tab>", toggleWS' ["NSP"])
+
+    -- Toggle magnification in the Tall layout.
+    , ("M-S-m", sendMessage Toggle)
+
     -- Applications
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
     , ("M1-S-<Return>", spawn "thunar")
-    , ("M-M1-z", spawn "zotero")
     , ("M-M1-f", spawn "firefox")
-    -- , ("M-M1-f p", spawn "firefox -P Personal")
     , ("M-M1-s", spawn "signal-desktop")
-
-    -- Email
-    , ("M-M1-p", spawn "firefox 'https://mail.proton.me/u/0/inbox'")
 
     -- Function keys
     , ("<XF86MonBrightnessUp>", spawn "/home/sahel/.local/scripts/backlight.sh +")
