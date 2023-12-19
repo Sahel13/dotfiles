@@ -28,14 +28,11 @@ import XMonad.Actions.CycleWS
 import XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
 
-------------------------------------------------------------------
--- Variables
-------------------------------------------------------------------
-myWorkspaces :: [String]
-myWorkspaces = ["main", "latex", "web", "code", "chat", "misc"]
-
-myTerminal :: String
-myTerminal = "alacritty"
+-- TopicSpaces
+import XMonad.Actions.TopicSpace
+import XMonad.Prompt.Workspace
+import XMonad.Util.Run
+import XMonad.Hooks.WorkspaceHistory (workspaceHistoryHook)
 
 ------------------------------------------------------------------
 -- Main
@@ -56,12 +53,16 @@ myConfig = def
     , borderWidth = 2
     , normalBorderColor = "#000000"
     , focusedBorderColor = "#076678"
-    , workspaces = myWorkspaces
+    , workspaces = topicNames topicItems
     -- Hooks
     , startupHook = myStartupHook
     , layoutHook = myLayoutHook
     , manageHook = myManageHook
+    , logHook = workspaceHistoryHook
     } `additionalKeysP` myKeys
+
+myTerminal :: String
+myTerminal = "alacritty"
 
 ------------------------------------------------------------------
 -- Xmobar
@@ -113,7 +114,6 @@ myLayoutHook = smartBorders $ TL.toggleLayouts twopane (tiled ||| Full)
 ------------------------------------------------------------------
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
-    , className =? "Signal" --> doShift "chat"
     , className =? "vlc" --> doShift "misc"
     , className =? "zoom" --> doShift "main"
     , className =? "zoom" --> doFloat
@@ -143,6 +143,48 @@ myScratchpads =
     manageHtop = customFloating $ W.RationalRect (1/12) (1/6) (10/12) (4/6)
 
 ------------------------------------------------------------------
+-- TopicSpaces
+------------------------------------------------------------------
+topicItems :: [TopicItem]
+topicItems =
+    [ noAction "main" "~"
+    , noAction "latex" "~/Documents/latex"
+    , inHome "web"   $ spawn "firefox"
+    , inHome "julia" $ spawn "code"
+    , inHome "chat"  $ spawn "signal-desktop"
+    , noAction "misc" "~"
+    , inHome "python" $ customPythonAction 
+    ]
+  where
+    customPythonAction :: X ()
+    customPythonAction = sendMessage (JumpToLayout "Full")
+                       *> spawnTermInTopic 
+
+topicConfig :: TopicConfig
+topicConfig = def
+  { topicDirs          = tiDirs    topicItems
+  , topicActions       = tiActions topicItems
+  , defaultTopicAction = const (pure ())
+  , defaultTopic       = "main"
+  }
+
+-- Spawn a terminal in the current topic directory.
+spawnTermInTopic :: X ()
+spawnTermInTopic = proc $ termInDir >-$ currentTopicDir topicConfig
+
+-- Switch to a topic.
+goto :: Topic -> X ()
+goto = switchTopic topicConfig
+
+-- Toggle between the two most recently used topics.
+toggleTopic :: X ()
+toggleTopic = switchNthLastFocusedByScreen topicConfig 1
+
+-- Topic space prompt.
+promptedGoto :: X ()
+promptedGoto = workspacePrompt def goto
+
+------------------------------------------------------------------
 -- Keybindings
 ------------------------------------------------------------------
 myKeys :: [(String, X ())]
@@ -151,7 +193,7 @@ myKeys =
     [ ("M-S-r", spawn "xmonad --recompile && xmonad --restart")
     , ("M-S-q", io exitSuccess)
     , ("M-q", kill)
-    , ("M-<Return>", spawn myTerminal)
+    , ("M-<Return>", spawnTermInTopic)
 
     -- Utilities
     , ("M-d", spawn "dmenu_run")
@@ -167,9 +209,6 @@ myKeys =
     , ("M-.", nextScreen)
     , ("M-,", prevScreen)
 
-    -- Toggle between current and previous workspaces.
-    , ("M-<Tab>", toggleWS' ["NSP"])
-
     -- Toggle magnification in the Tall layout.
     , ("M-S-m", sendMessage Toggle)
 
@@ -180,7 +219,7 @@ myKeys =
     , ("M-S-<Space>", sendMessage TL.ToggleLayout)
 
     -- Applications
-    , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
+    , ("M-S-<Return>", proc $ inTerm >-> setXClass "Ranger" >-> execute "ranger")
     , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-f", spawn "firefox")
     , ("M-M1-s", spawn "signal-desktop")
@@ -191,4 +230,13 @@ myKeys =
     , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+")
     , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%-")
     , ("<XF86AudioMute>", spawn "amixer set Master toggle")
+
+    -- Topic space keybindings.
+    , ("M-<Tab>", toggleTopic)
+    , ("M-g", promptedGoto)
+    ]
+    ++
+    [ ("M-" ++ m ++ k, f i)
+    | (i, k) <- zip (topicNames topicItems) (map show [1 .. 9 :: Int])
+    , (f, m) <- [(goto, ""), (windows . W.shift, "S-")]
     ]

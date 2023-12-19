@@ -48,7 +48,7 @@ xsetroot -cursor_name left_ptr
 feh --no-fehbg --bg-fill ~/Downloads/astronaut.jpg
 
 # Trayer
-trayer --edge bottom --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --transparent true --alpha 5 --tint 0x000000 --height 30 &
+trayer --edge bottom --align right --SetDockType true --SetPartialStrut true --expand true --width 3 --transparent true --alpha 4 --tint 0x000000 --height 30 &
 
 # Network manager applet
 nm-applet &
