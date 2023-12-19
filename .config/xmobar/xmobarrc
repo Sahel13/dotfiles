@@ -1,7 +1,7 @@
 Config { font            = "Mononoki Nerd Font Mono 14"
 	     , additionalFonts = ["Font Awesome 6 Free Solid 14"]
        , bgColor         = "#1d1d1d"
-       , fgColor         = "#afb1af"
+       , fgColor         = "#f8f8ff"
        , position        = BottomSize L 95 30
 
        , commands = [ Run XMonadLog
@@ -36,8 +36,9 @@ Config { font            = "Mononoki Nerd Font Mono 14"
        -- battery monitor
        , Run Battery        [ "--template" , "<fn=1>\xf241</fn> <acstatus>"
                             , "--Low"      , "30"        -- units: %
-                            , "--High"     , "80"        -- units: %
-                            , "--low"      , "darkred"
+                            , "--High"     , "70"        -- units: %
+                            , "--l"     , "darkred"
+                            , "--h"     , "darkred"
 
                             , "--" -- battery specific options
                                       -- discharging status

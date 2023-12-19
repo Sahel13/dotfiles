@@ -4,34 +4,35 @@
 import XMonad
 import System.Exit (exitSuccess)
 
--- Hooks
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
-import XMonad.Hooks.ManageHelpers
+import XMonad.Util.Loggers (logClassnames)
+import XMonad.Hooks.ManageHelpers (isDialog)
 
 -- Layouts
 import XMonad.Layout.NoBorders (smartBorders)
+import XMonad.Layout.ResizableTile
 import XMonad.Layout.TwoPane
 import XMonad.Layout.Magnifier
+import XMonad.Layout.Renamed
+import qualified XMonad.Layout.ToggleLayouts as TL
 
 -- Keybindings
 import XMonad.Util.EZConfig (additionalKeysP)
--- import XMonad.Actions.Submap
+import XMonad.Actions.Submap
+import XMonad.Actions.CycleWS
 
 -- Scratchpads
 import XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
 
--- Multi-monitor support
-import XMonad.Actions.CycleWS (toggleWS', nextScreen, prevScreen)
-
 ------------------------------------------------------------------
 -- Variables
 ------------------------------------------------------------------
 myWorkspaces :: [String]
-myWorkspaces = ["main", "work", "web", "code", "chat", "misc"]
+myWorkspaces = ["main", "latex", "web", "code", "chat", "misc"]
 
 myTerminal :: String
 myTerminal = "alacritty"
@@ -52,7 +53,7 @@ myConfig = def
     { modMask = mod4Mask
     , terminal = myTerminal
     , focusFollowsMouse = False
-    , borderWidth = 3
+    , borderWidth = 2
     , normalBorderColor = "#000000"
     , focusedBorderColor = "#076678"
     , workspaces = myWorkspaces
@@ -67,37 +68,51 @@ myConfig = def
 ------------------------------------------------------------------
 myXmobarPP :: PP
 myXmobarPP = def
-    { ppCurrent = accentColor . wrap "[" "]"
-    , ppHidden = accentColor
-    , ppTitle = accentColor . shorten 40
+    { ppSep     = red " • "
+    , ppCurrent = wrap "" "" . xmobarBorder "Top" "#ff0000" 2
+    , ppVisible = white
+    , ppHidden  = offWhite
+    , ppUrgent  = red . wrap (yellow "!") (yellow "!")
+    , ppOrder   = \[ws, l, _, wins] -> [ws, l, wins]
+    , ppExtras  = [logClassnames formatFocused formatUnfocused]
     }
   where
-    accentColor = xmobarColor "#32827f" ""
+    formatFocused   = wrap (white "[") (white "]") . red . ppWindow
+    formatUnfocused = wrap (offWhite "[") (offWhite "]") . brown . ppWindow
+
+    ppWindow :: String -> String
+    ppWindow s | s == "Navigator" = xmobarRaw "Firefox"
+               | otherwise = xmobarRaw $ shorten 25 s
+
+    offWhite, brown, red, white, yellow :: String -> String
+    brown  = xmobarColor "#a52a2a" ""
+    white    = xmobarColor "#f8f8f2" ""
+    yellow   = xmobarColor "#f1fa8c" ""
+    red      = xmobarColor "#ff5555" ""
+    offWhite = xmobarColor "#bbbbbb" ""
 
 ------------------------------------------------------------------
 -- StartupHook
 ------------------------------------------------------------------
 myStartupHook :: X ()
-myStartupHook = do
-    setWMName "LG3D" -- Needed for PyCharm
+myStartupHook = do setWMName "LG3D" -- Needed for PyCharm
 
 ------------------------------------------------------------------
 -- Layout
 ------------------------------------------------------------------
-myLayoutHook = smartBorders (tiled ||| Full ||| twopane)
+myLayoutHook = smartBorders $ TL.toggleLayouts twopane (tiled ||| Full)
   where
-    tiled   = magnifierczOff' 1.3 (Tall nmaster delta ratio)
+    tiled = renamed [Replace "Tall"] $ magnifierczOff' 1.3
+                                       $ ResizableTall 1 delta ratio []
     twopane = TwoPane delta ratio
-    nmaster = 1      -- Default number of windows in the master pane
-    delta   = 3/100  -- Percent of the screen to increment by when resizing panes
-    ratio   = 1/2    -- Default proportion of the screen occupied by the master pane
+    delta = 3/100
+    ratio = 1/2
 
 ------------------------------------------------------------------
 -- Window rules
 ------------------------------------------------------------------
 myManageHook = composeAll
-    [ className =? "Zotero" --> doShift "main"
-    , className =? "firefox" --> doShift "web"
+    [ className =? "firefox" --> doShift "web"
     , className =? "Signal" --> doShift "chat"
     , className =? "vlc" --> doShift "misc"
     , className =? "zoom" --> doShift "main"
@@ -140,7 +155,7 @@ myKeys =
 
     -- Utilities
     , ("M-d", spawn "dmenu_run")
-    , ("M-s", spawn "flameshot gui")
+    , ("<Print>", spawn "flameshot gui")
     , ("M-S-x", spawn "/home/sahel/.local/scripts/screen_lock.sh")
 
         -- Scratchpads
@@ -157,6 +172,12 @@ myKeys =
 
     -- Toggle magnification in the Tall layout.
     , ("M-S-m", sendMessage Toggle)
+
+    -- Shrink/expand windows vertically in the Tall layout.
+    , ("M-a", sendMessage MirrorShrink)
+    , ("M-z", sendMessage MirrorExpand)
+
+    , ("M-S-<Space>", sendMessage TL.ToggleLayout)
 
     -- Applications
     , ("M-S-<Return>", spawn (myTerminal ++ " -e ranger"))
