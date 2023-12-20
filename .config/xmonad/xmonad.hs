@@ -28,8 +28,10 @@ import XMonad.Actions.CycleWS
 import XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
 
--- TopicSpaces
+-- Topics
 import XMonad.Actions.TopicSpace
+import XMonad.Prompt
+import XMonad.Prompt.FuzzyMatch
 import XMonad.Prompt.Workspace
 import XMonad.Util.Run
 import XMonad.Hooks.WorkspaceHistory (workspaceHistoryHook)
@@ -61,14 +63,13 @@ myConfig = def
     , logHook = workspaceHistoryHook
     } `additionalKeysP` myKeys
 
-myTerminal :: String
-myTerminal = "alacritty"
+myTerminal :: String = "alacritty"
 
 ------------------------------------------------------------------
 -- Xmobar
 ------------------------------------------------------------------
 myXmobarPP :: PP
-myXmobarPP = def
+myXmobarPP = filterOutWsPP [scratchpadWorkspaceTag] $ def
     { ppSep     = red " • "
     , ppCurrent = wrap "" "" . xmobarBorder "Top" "#ff0000" 2
     , ppVisible = white
@@ -80,13 +81,14 @@ myXmobarPP = def
   where
     formatFocused   = wrap (white "[") (white "]") . red . ppWindow
     formatUnfocused = wrap (offWhite "[") (offWhite "]") . brown . ppWindow
-
+ 
+    -- Firefox has a weird class name.
     ppWindow :: String -> String
     ppWindow s | s == "Navigator" = xmobarRaw "Firefox"
                | otherwise = xmobarRaw $ shorten 25 s
-
+ 
     offWhite, brown, red, white, yellow :: String -> String
-    brown  = xmobarColor "#a52a2a" ""
+    brown    = xmobarColor "#a52a2a" ""
     white    = xmobarColor "#f8f8f2" ""
     yellow   = xmobarColor "#f1fa8c" ""
     red      = xmobarColor "#ff5555" ""
@@ -143,19 +145,20 @@ myScratchpads =
     manageHtop = customFloating $ W.RationalRect (1/12) (1/6) (10/12) (4/6)
 
 ------------------------------------------------------------------
--- TopicSpaces
+-- Topics
 ------------------------------------------------------------------
 topicItems :: [TopicItem]
 topicItems =
     [ noAction "main" "~"
     , noAction "latex" "~/Documents/latex"
-    , inHome "web"   $ spawn "firefox"
-    , inHome "julia" $ spawn "code"
-    , inHome "chat"  $ spawn "signal-desktop"
+    , inHome "web" $ spawn "firefox"
+    , TI "julia" "~/Code/InsideOutSMC.jl" $ spawn "code"
+    , inHome "chat" $ spawn "signal-desktop"
     , noAction "misc" "~"
     , inHome "python" $ customPythonAction 
     ]
   where
+    -- Just a demo.
     customPythonAction :: X ()
     customPythonAction = sendMessage (JumpToLayout "Full")
                        *> spawnTermInTopic 
@@ -182,7 +185,22 @@ toggleTopic = switchNthLastFocusedByScreen topicConfig 1
 
 -- Topic space prompt.
 promptedGoto :: X ()
-promptedGoto = workspacePrompt def goto
+promptedGoto = workspacePrompt prompt goto
+
+------------------------------------------------------------------
+-- Prompt configuration.
+------------------------------------------------------------------
+prompt :: XPConfig
+prompt = def
+    { font = "xft: Mononoki Nerd Font Mono-14"
+    , fgColor = "#f9f9ff"
+    , bgColor = "#1d1d1d"
+    , borderColor = "#ff5555"
+    , height = 30
+    , autoComplete = Just (2 * 10^3)
+    , searchPredicate = fuzzyMatch
+    , sorter = fuzzySort
+    }
 
 ------------------------------------------------------------------
 -- Keybindings
