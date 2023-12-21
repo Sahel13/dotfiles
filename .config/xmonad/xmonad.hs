@@ -10,6 +10,9 @@ import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Util.Loggers (logClassnames)
 import XMonad.Hooks.ManageHelpers (isDialog)
+import XMonad.Prompt
+import XMonad.Prompt.FuzzyMatch
+import XMonad.Actions.UpdatePointer
 
 -- Layouts
 import XMonad.Layout.NoBorders (smartBorders)
@@ -30,8 +33,6 @@ import qualified XMonad.StackSet as W
 
 -- Topics
 import XMonad.Actions.TopicSpace
-import XMonad.Prompt
-import XMonad.Prompt.FuzzyMatch
 import XMonad.Prompt.Workspace
 import XMonad.Util.Run
 import XMonad.Hooks.WorkspaceHistory (workspaceHistoryHook)
@@ -60,7 +61,7 @@ myConfig = def
     , startupHook = myStartupHook
     , layoutHook = myLayoutHook
     , manageHook = myManageHook
-    , logHook = workspaceHistoryHook
+    , logHook = myLogHook
     } `additionalKeysP` myKeys
 
 myTerminal :: String = "alacritty"
@@ -101,7 +102,14 @@ myStartupHook :: X ()
 myStartupHook = do setWMName "LG3D" -- Needed for PyCharm
 
 ------------------------------------------------------------------
--- Layout
+-- LogHook
+------------------------------------------------------------------
+myLogHook :: X ()
+myLogHook = workspaceHistoryHookExclude [scratchpadWorkspaceTag]
+          <> updatePointer (0.5, 0.5) (0, 0)
+
+------------------------------------------------------------------
+-- LayoutHook
 ------------------------------------------------------------------
 myLayoutHook = smartBorders $ TL.toggleLayouts twopane (tiled ||| Full)
   where
@@ -112,7 +120,7 @@ myLayoutHook = smartBorders $ TL.toggleLayouts twopane (tiled ||| Full)
     ratio = 1/2
 
 ------------------------------------------------------------------
--- Window rules
+-- ManageHook
 ------------------------------------------------------------------
 myManageHook = composeAll
     [ className =? "firefox" --> doShift "web"
