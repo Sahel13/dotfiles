@@ -44,7 +44,7 @@ main :: IO ()
 main = xmonad
      . ewmhFullscreen
      . ewmh
-     . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
+     . dynamicEasySBs barSpawner
      $ myConfig
 
 -- Configuration
@@ -69,6 +69,14 @@ myTerminal :: String = "alacritty"
 ------------------------------------------------------------------
 -- Xmobar
 ------------------------------------------------------------------
+xmobar1 = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0 ~/.config/xmobar/xmobarrc" (pure myXmobarPP)
+xmobar2 = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1 ~/.config/xmobar/xmobarrc" (pure myXmobarPP)
+
+barSpawner :: ScreenId -> IO StatusBarConfig
+barSpawner 0 = pure $ xmobar1
+barSpawner 1 = pure $ xmobar2
+barSpawner _ = mempty
+
 myXmobarPP :: PP
 myXmobarPP = filterOutWsPP [scratchpadWorkspaceTag] $ def
     { ppSep     = red " • "
@@ -127,6 +135,7 @@ myManageHook = composeAll
     , className =? "vlc" --> doShift "misc"
     , className =? "zoom" --> doShift "main"
     , className =? "zoom" --> doFloat
+    , className =? "Signal" --> doShift "chat"
     , isDialog --> doFloat
     , namedScratchpadManageHook myScratchpads
     ]
@@ -138,6 +147,7 @@ myScratchpads =
     [ NS "terminal" spawnTerm findTerm manageTerm
     , NS "network" spawnNetwork findNetwork manageNetwork 
     , NS "htop" spawnHtop findHtop manageHtop 
+    , NS "thunar" spawnThunar findThunar manageThunar 
     ]
   where
     spawnTerm = myTerminal ++ " -t terminal"
@@ -152,18 +162,23 @@ myScratchpads =
     findHtop = title =? "htop"
     manageHtop = customFloating $ W.RationalRect (1/12) (1/6) (10/12) (4/6)
 
+    spawnThunar = "thunar"
+    findThunar = title =? "sahel - Thunar"
+    manageThunar = customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)
+
 ------------------------------------------------------------------
 -- Topics
 ------------------------------------------------------------------
 topicItems :: [TopicItem]
 topicItems =
     [ noAction "main" "~"
-    , noAction "latex" "~/Documents/latex"
+    , noAction "work" "~"
     , inHome "web" $ spawn "firefox"
-    , TI "julia" "~/Code/InsideOutSMC.jl" $ spawn "code"
-    , inHome "chat" $ spawn "signal-desktop"
+    , noAction "code" "~"
+    , noAction "chat" "~"
     , noAction "misc" "~"
     , inHome "python" $ customPythonAction 
+    , noAction "prob" "~/Documents/prob_theory"
     ]
   where
     -- Just a demo.
@@ -230,6 +245,7 @@ myKeys =
     , ("M-C-<Return>", namedScratchpadAction myScratchpads "terminal")
     , ("M-S-n", namedScratchpadAction myScratchpads "network")
     , ("M-S-h", namedScratchpadAction myScratchpads "htop")
+    , ("M1-S-<Return>", namedScratchpadAction myScratchpads "thunar")
 
     -- Multi-monitor navigation
     , ("M-.", nextScreen)
@@ -246,7 +262,6 @@ myKeys =
 
     -- Applications
     , ("M-S-<Return>", proc $ inTerm >-> setXClass "Ranger" >-> execute "ranger")
-    , ("M1-S-<Return>", spawn "thunar")
     , ("M-M1-f", spawn "firefox")
     , ("M-M1-s", spawn "signal-desktop")
 
